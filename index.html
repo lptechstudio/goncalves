@@ -168,9 +168,11 @@
 <input class="block w-full pl-10 pr-3 py-3 border border-surface-container-lowest/20 rounded bg-on-surface/50 text-surface-container-lowest placeholder-surface-dim/30 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-colors sm:text-sm font-body-md" id="password" name="password" placeholder="••••••••" required="" type="password">
 </div>
 </div>
+<!-- Error Message -->
+<div id="login-error" class="hidden text-sm text-red-400 bg-red-900/20 border border-red-500/30 rounded px-3 py-2 text-center"></div>
 <!-- Submit Button -->
 <div class="pt-4">
-<button class="w-full flex justify-center py-3 px-4 border border-transparent rounded bg-primary hover:bg-[#A0001C] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-on-surface text-on-primary font-label-sm text-label-sm uppercase tracking-widest transition-all duration-200 shadow-lg shadow-primary/20" type="button" onclick="window.location.href='dashboard.html'">
+<button class="w-full flex justify-center py-3 px-4 border border-transparent rounded bg-primary hover:bg-[#A0001C] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-on-surface text-on-primary font-label-sm text-label-sm uppercase tracking-widest transition-all duration-200 shadow-lg shadow-primary/20" type="button" id="login-btn">
                         Acessar Sistema
                     </button>
 </div>
@@ -201,24 +203,51 @@
 
 
 <script>
-document.querySelector('button[type="button"]').addEventListener('click', function() {
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
-    if (!email || !password) {
-        alert('Preencha email e senha!');
-        return;
-    }
-    // Credenciais padrão
-    if (email === 'admin@calcadosgoncalves.com.br' && password === 'admin123') {
-        window.location.href = 'dashboard.html';
+// Verificar se já está logado
+if (localStorage.getItem('cg_logged') === 'true') {
+  window.location.href = 'dashboard.html';
+}
+
+function doLogin() {
+  var btn = document.getElementById('login-btn');
+  var email = document.getElementById('email').value.trim();
+  var password = document.getElementById('password').value;
+  var errEl = document.getElementById('login-error');
+  
+  if (!email || !password) {
+    errEl.textContent = 'Preencha email e senha.';
+    errEl.classList.remove('hidden');
+    return;
+  }
+  
+  // Loading state
+  btn.disabled = true;
+  btn.innerHTML = '<svg class="animate-spin h-5 w-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg>';
+  
+  setTimeout(function() {
+    var savedPass = localStorage.getItem('cg_password') || 'admin123';
+    if (email === 'admin@calcadosgoncalves.com.br' && password === savedPass) {
+      localStorage.setItem('cg_logged', 'true');
+      window.location.href = 'dashboard.html';
     } else {
-        alert('Email ou senha incorretos!\nUse: admin@calcadosgoncalves.com.br / admin123');
+      errEl.textContent = 'Email ou senha incorretos. Use: admin@calcadosgoncalves.com.br / admin123';
+      errEl.classList.remove('hidden');
+      btn.disabled = false;
+      btn.innerHTML = 'Acessar Sistema';
     }
-});
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-        document.querySelector('button[type="button"]').click();
-    }
+  }, 800);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('login-btn').addEventListener('click', doLogin);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') doLogin();
+  });
+  document.querySelectorAll('input').forEach(function(input) {
+    input.addEventListener('input', function() {
+      document.getElementById('login-error').classList.add('hidden');
+    });
+  });
 });
 </script>
 </body></html>
