@@ -149,7 +149,7 @@
                 Produção
             </a>
 <!-- Configurações (Inactive) -->
-<a class="flex items-center gap-4 text-secondary-fixed px-4 py-3 hover:bg-white/10 transition-colors duration-200 opacity-80 text-body-md font-body-md group" href="#configuracoes">
+<a class="flex items-center gap-4 text-secondary-fixed px-4 py-3 hover:bg-white/10 transition-colors duration-200 opacity-80 text-body-md font-body-md group" href="configuracoes.html">
 <span class="material-symbols-outlined group-hover:scale-110 transition-transform">settings</span>
                 Configurações
             </a>
@@ -356,4 +356,15 @@
 
 
 
+
+<script>
+// Proteção de rota
+if (localStorage.getItem('cg_logged') !== 'true') {
+  window.location.href = 'index.html';
+}
+function logout() {
+  localStorage.removeItem('cg_logged');
+  window.location.href = 'index.html';
+}
+</script>
 </body></html>
