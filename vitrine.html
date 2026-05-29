@@ -213,22 +213,22 @@
 </div>
 <div class="flex flex-col space-y-2 w-full">
 <!-- Inactive -->
-<a class="flex items-center gap-4 text-secondary-fixed dark:text-secondary-fixed-dim px-4 py-3 hover:bg-white/10 transition-colors duration-200 opacity-100 hover:opacity-80 transition-opacity mx-2 rounded-lg" href="{{DATA:SCREEN:SCREEN_7}}">
+<a class="flex items-center gap-4 text-secondary-fixed dark:text-secondary-fixed-dim px-4 py-3 hover:bg-white/10 transition-colors duration-200 opacity-100 hover:opacity-80 transition-opacity mx-2 rounded-lg" href="dashboard.html">
 <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
 <span class="text-body-md font-body-md">Dashboard</span>
 </a>
 <!-- Active -->
-<a class="flex items-center gap-4 bg-primary-container dark:bg-primary text-on-primary border-l-4 border-primary dark:border-primary-fixed-dim px-4 py-3 hover:bg-white/10 transition-colors duration-200 opacity-100 hover:opacity-80 transition-opacity" href="{{DATA:SCREEN:SCREEN_2}}">
+<a class="flex items-center gap-4 bg-primary-container dark:bg-primary text-on-primary border-l-4 border-primary dark:border-primary-fixed-dim px-4 py-3 hover:bg-white/10 transition-colors duration-200 opacity-100 hover:opacity-80 transition-opacity" href="vitrine.html">
 <span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
 <span class="text-body-md font-body-md">Coleções</span>
 </a>
 <!-- Inactive -->
-<a class="flex items-center gap-4 text-secondary-fixed dark:text-secondary-fixed-dim px-4 py-3 hover:bg-white/10 transition-colors duration-200 opacity-100 hover:opacity-80 transition-opacity mx-2 rounded-lg" href="{{DATA:SCREEN:SCREEN_4}}">
+<a class="flex items-center gap-4 text-secondary-fixed dark:text-secondary-fixed-dim px-4 py-3 hover:bg-white/10 transition-colors duration-200 opacity-100 hover:opacity-80 transition-opacity mx-2 rounded-lg" href="controle.html">
 <span class="material-symbols-outlined" data-icon="factory">factory</span>
 <span class="text-body-md font-body-md">Produção</span>
 </a>
 <!-- Inactive -->
-<a class="flex items-center gap-4 text-secondary-fixed dark:text-secondary-fixed-dim px-4 py-3 hover:bg-white/10 transition-colors duration-200 opacity-100 hover:opacity-80 transition-opacity mx-2 rounded-lg mt-auto" href="{{DATA:SCREEN:SCREEN_5}}">
+<a class="flex items-center gap-4 text-secondary-fixed dark:text-secondary-fixed-dim px-4 py-3 hover:bg-white/10 transition-colors duration-200 opacity-100 hover:opacity-80 transition-opacity mx-2 rounded-lg mt-auto" href="#configuracoes">
 <span class="material-symbols-outlined" data-icon="settings">settings</span>
 <span class="text-body-md font-body-md">Configurações</span>
 </a>
@@ -248,7 +248,7 @@
 <button class="p-2 text-secondary dark:text-secondary-fixed hover:bg-surface-variant/50 dark:hover:bg-surface-variant/10 transition-colors rounded-full active:scale-95 transition-all duration-150">
 <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
 </button>
-<button class="p-2 text-secondary dark:text-secondary-fixed hover:bg-surface-variant/50 dark:hover:bg-surface-variant/10 transition-colors rounded-full active:scale-95 transition-all duration-150 opacity-50 pointer-events-none" onclick="window.location.href='{{DATA:SCREEN:SCREEN_5}}'">
+<button class="p-2 text-secondary dark:text-secondary-fixed hover:bg-surface-variant/50 dark:hover:bg-surface-variant/10 transition-colors rounded-full active:scale-95 transition-all duration-150 opacity-50 pointer-events-none" onclick="window.location.href='#configuracoes'">
 <span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
 </button>
 </div>
@@ -274,7 +274,7 @@
 <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md text-white text-label-sm font-label-sm rounded mb-3 uppercase tracking-wider border border-white/30">Destaque</span>
 <h3 class="text-white text-display-lg font-display-lg mb-2">Coleção Winter 2024</h3>
 <p class="text-white/90 text-body-lg font-body-lg max-w-2xl hidden md:block">Linha exclusiva combinando materiais sustentáveis com design minimalista de alta costura.</p>
-<button class="mt-6 px-6 py-2 bg-primary text-on-primary rounded text-label-sm font-label-sm hover:bg-[#a0001c] transition-colors border-none" onclick="window.location.href='{{DATA:SCREEN:SCREEN_2}}'">Explorar Coleção</button>
+<button class="mt-6 px-6 py-2 bg-primary text-on-primary rounded text-label-sm font-label-sm hover:bg-[#a0001c] transition-colors border-none" onclick="window.location.href='vitrine.html'">Explorar Coleção</button>
 </div>
 </div>
 <!-- Filter Bar -->
@@ -379,22 +379,22 @@
 <!-- BottomNavBar (Mobile) -->
 <nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-margin-mobile pb-safe pt-2 bg-surface-container-highest border-t border-outline-variant z-50 shadow-lg" style="padding-bottom: calc(8px + env(safe-area-inset-bottom));">
 <!-- Inactive -->
-<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed p-2 active:bg-surface-variant active:scale-95 transition-all w-16" href="{{DATA:SCREEN:SCREEN_7}}">
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed p-2 active:bg-surface-variant active:scale-95 transition-all w-16" href="dashboard.html">
 <span class="material-symbols-outlined mb-1" data-icon="grid_view">grid_view</span>
 <span class="text-label-sm font-label-sm text-[10px]">Painel</span>
 </a>
 <!-- Active -->
-<a class="flex flex-col items-center justify-center text-primary dark:text-inverse-primary bg-primary-fixed/20 rounded-xl p-2 active:scale-95 transition-all w-16" href="{{DATA:SCREEN:SCREEN_2}}">
+<a class="flex flex-col items-center justify-center text-primary dark:text-inverse-primary bg-primary-fixed/20 rounded-xl p-2 active:scale-95 transition-all w-16" href="vitrine.html">
 <span class="material-symbols-outlined filled mb-1" data-icon="auto_awesome_motion">auto_awesome_motion</span>
 <span class="text-label-sm font-label-sm text-[10px]">Coleções</span>
 </a>
 <!-- Inactive -->
-<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed p-2 active:bg-surface-variant active:scale-95 transition-all w-16" href="{{DATA:SCREEN:SCREEN_4}}">
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed p-2 active:bg-surface-variant active:scale-95 transition-all w-16" href="controle.html">
 <span class="material-symbols-outlined mb-1" data-icon="precision_manufacturing">precision_manufacturing</span>
 <span class="text-label-sm font-label-sm text-[10px]">Fábrica</span>
 </a>
 <!-- Inactive -->
-<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed p-2 active:bg-surface-variant active:scale-95 transition-all w-16 opacity-50 pointer-events-none" href="{{DATA:SCREEN:SCREEN_5}}">
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed p-2 active:bg-surface-variant active:scale-95 transition-all w-16 opacity-50 pointer-events-none" href="#configuracoes">
 <span class="material-symbols-outlined mb-1" data-icon="person">person</span>
 <span class="text-label-sm font-label-sm text-[10px]">Perfil</span>
 </a>
