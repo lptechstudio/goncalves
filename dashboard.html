@@ -1,0 +1,327 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Calçados Gonçalves - Gestão Industrial</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#e5e2e1",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed-dim": "#ffb3b1",
+                    "tertiary-container": "#6a6360",
+                    "inverse-on-surface": "#f1f1f1",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e2e2e2",
+                    "on-secondary-fixed-variant": "#474746",
+                    "on-secondary-container": "#636262",
+                    "on-primary-container": "#ffdad8",
+                    "surface": "#f9f9f9",
+                    "tertiary-fixed-dim": "#cec5c1",
+                    "primary-fixed": "#ffdad8",
+                    "secondary-container": "#e2dfde",
+                    "on-surface-variant": "#5c403f",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#eeeeee",
+                    "outline": "#906f6e",
+                    "inverse-surface": "#2f3131",
+                    "outline-variant": "#e5bdbb",
+                    "surface-dim": "#dadada",
+                    "secondary": "#5f5e5e",
+                    "on-tertiary-container": "#eae0dc",
+                    "on-surface": "#1a1c1c",
+                    "surface-container-highest": "#e2e2e2",
+                    "tertiary-fixed": "#eae0dd",
+                    "surface-container-low": "#f3f3f3",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e8e8e8",
+                    "on-primary-fixed-variant": "#92001c",
+                    "surface-tint": "#bf0229",
+                    "primary": "#9e001f",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#1f1b18",
+                    "surface-bright": "#f9f9f9",
+                    "on-primary-fixed": "#410007",
+                    "inverse-primary": "#ffb3b1",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "tertiary": "#514b49",
+                    "on-background": "#1a1c1c",
+                    "primary-container": "#c8102e",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f9f9f9",
+                    "on-tertiary-fixed-variant": "#4b4643"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "margin-mobile": "16px",
+                    "sidebar-width": "260px",
+                    "margin-desktop": "40px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Ambient Soft Shadows as requested in style guidance */
+        .ambient-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #e2dfde;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col md:flex-row overflow-x-hidden">
+<!-- DESKTOP SIDEBAR: NavigationDrawer -->
+<aside class="hidden md:flex fixed left-0 top-0 h-full w-sidebar-width flex-col bg-secondary shadow-md py-8 space-y-2 z-40">
+<div class="px-6 mb-8">
+<h2 class="text-headline-md font-headline-md text-surface-container-lowest">Gestão Industrial</h2>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Active Tab: Dashboard -->
+<a class="flex items-center gap-4 bg-primary-container text-on-primary border-l-4 border-primary px-4 py-3 hover:bg-white/10 transition-colors duration-200" href="{{DATA:SCREEN:SCREEN_7}}">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-body-md font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 text-secondary-fixed px-4 py-3 hover:bg-white/10 transition-colors duration-200" href="{{DATA:SCREEN:SCREEN_2}}">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-body-md font-body-md">Coleções</span>
+</a>
+<a class="flex items-center gap-4 text-secondary-fixed px-4 py-3 hover:bg-white/10 transition-colors duration-200" href="{{DATA:SCREEN:SCREEN_4}}">
+<span class="material-symbols-outlined">factory</span>
+<span class="text-body-md font-body-md">Produção</span>
+</a>
+<a class="flex items-center gap-4 text-secondary-fixed px-4 py-3 hover:bg-white/10 transition-colors duration-200" href="{{DATA:SCREEN:SCREEN_5}}">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-body-md font-body-md">Configurações</span>
+</a>
+</nav>
+</aside>
+<!-- MAIN CONTENT AREA -->
+<div class="flex-1 md:ml-sidebar-width flex flex-col min-h-screen pb-20 md:pb-0">
+<!-- TOP APP BAR -->
+<header class="docked full-width top-0 h-[64px] bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center px-margin-mobile md:px-margin-desktop w-full z-50 sticky">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold">
+                    CG
+                </div>
+<div class="flex flex-col">
+<h1 class="text-headline-md font-headline-md font-bold text-primary">Calçados Gonçalves</h1>
+<span class="text-label-sm font-label-sm text-secondary opacity-60">Gestão Industrial de Coleções</span>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-surface-variant/50 transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[28px]">account_circle</span>
+</button>
+</header>
+<!-- DASHBOARD CANVAS -->
+<main class="flex-1 p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Welcome Header -->
+<div class="mb-gutter flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-on-background">Olá, Gestor</h2>
+<p class="text-body-lg font-body-lg text-secondary mt-1">Visão geral da produção e coleções ativas.</p>
+</div>
+<!-- Quick Actions -->
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 rounded-lg border border-outline text-secondary hover:bg-surface-variant transition-colors text-label-sm font-label-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">description</span>
+                        Relatório Técnico
+                    </button>
+<button class="px-4 py-2 rounded-lg bg-primary text-on-primary hover:bg-[#A0001C] transition-colors text-label-sm font-label-sm flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                        Nova Coleção
+                    </button>
+</div>
+</div>
+<!-- BENTO GRID -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-gutter">
+<!-- Produção Mensal (Large Chart Card) -->
+<div class="col-span-1 lg:col-span-8 bg-surface-container-lowest rounded-xl p-6 ambient-shadow border border-secondary-container flex flex-col">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-title-lg font-title-lg text-on-background">Produção Mensal</h3>
+<p class="text-body-md font-body-md text-secondary">Pares manufaturados vs Meta</p>
+</div>
+<div class="px-3 py-1 rounded-full bg-surface-container-high text-label-sm font-label-sm text-secondary">
+                            Mês Atual
+                        </div>
+</div>
+<!-- Faux Graph Area -->
+<div class="flex-1 min-h-[200px] w-full flex items-end justify-between gap-2 pt-4 relative">
+<!-- Grid lines -->
+<div class="absolute inset-0 flex flex-col justify-between z-0">
+<div class="w-full border-b border-surface-container h-0"></div>
+<div class="w-full border-b border-surface-container h-0"></div>
+<div class="w-full border-b border-surface-container h-0"></div>
+<div class="w-full border-b border-surface-container h-0"></div>
+</div>
+<!-- Bars -->
+<div class="w-full flex justify-around items-end z-10 h-full pb-6">
+<div class="w-[8%] bg-secondary-container rounded-t-sm h-[40%] hover:bg-primary/20 transition-colors"></div>
+<div class="w-[8%] bg-secondary-container rounded-t-sm h-[60%] hover:bg-primary/20 transition-colors"></div>
+<div class="w-[8%] bg-secondary-container rounded-t-sm h-[45%] hover:bg-primary/20 transition-colors"></div>
+<div class="w-[8%] bg-primary rounded-t-sm h-[85%] relative shadow-sm">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-surface-container-lowest text-label-sm font-label-sm px-2 py-1 rounded">
+                                    +12%
+                                </div>
+</div>
+<div class="w-[8%] bg-secondary-container rounded-t-sm h-[70%] hover:bg-primary/20 transition-colors"></div>
+<div class="w-[8%] bg-secondary-container rounded-t-sm h-[50%] hover:bg-primary/20 transition-colors"></div>
+</div>
+</div>
+</div>
+<!-- Coleção Highlight (Fashion Image Card) -->
+<div class="col-span-1 lg:col-span-4 bg-surface-container-lowest rounded-xl overflow-hidden ambient-shadow relative group">
+<img alt="Coleção Santa Lolla Verão" class="w-full h-full object-cover absolute inset-0 transition-transform duration-700 group-hover:scale-105 z-0" data-alt="A high-end fashion editorial photograph of a premium leather high-heel shoe resting on a sleek marble plinth. The lighting is soft and dramatic, creating elegant shadows that highlight the craftsmanship and texture of the leather. The background is a minimalist studio setting with neutral, warm tones that contrast with the striking red accents of the shoe. The overall aesthetic is luxurious, industrial-chic, and sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBR_EktEJiXLWZPi4U-GPY5d_BGJCCkAp03gaAvN3X9i0ooXZdxjZfuvMPaqj8lLgw1XLgf3mbL-rRATxBKpH0RAEqO88CBE488HE49HMcFs9VZ5gnlQipQu8e4qI7US3rgTig4huBPZsmj2kgJEFIfmQftpfodupO_QdqZu-vuE6XbDdwUD7g2anIiVY0wK7dQ-4JCInaipsk1zyN881h0MJraVO-1AdnJK55tn8j-BJUagteSCMW18biI9JCZSAHy1YkRSAF9MECw">
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/90 via-on-background/20 to-transparent z-10"></div>
+<div class="absolute inset-0 z-20 p-6 flex flex-col justify-between">
+<div class="flex justify-end">
+<span class="px-3 py-1 bg-[#1a1c1c]/80 backdrop-blur-md rounded-full text-surface-container-lowest text-label-sm font-label-sm border border-outline-variant flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-[#10c871]"></span> Aprovado
+                            </span>
+</div>
+<div>
+<span class="text-label-sm font-label-sm text-primary-fixed tracking-wider uppercase mb-1 block">Destaque</span>
+<h3 class="text-headline-md font-headline-md text-surface-container-lowest">Coleção Santa Lolla Verão</h3>
+<button class="mt-4 px-4 py-2 bg-surface-container-lowest/10 backdrop-blur-sm border border-surface-container-lowest/30 rounded-lg text-surface-container-lowest text-label-sm font-label-sm hover:bg-surface-container-lowest/20 transition-colors">
+                                Ver Detalhes
+                            </button>
+</div>
+</div>
+</div>
+<!-- Meta de Qualidade -->
+<div class="col-span-1 lg:col-span-4 bg-surface-container-lowest rounded-xl p-6 ambient-shadow border border-secondary-container flex items-center justify-between">
+<div>
+<p class="text-label-sm font-label-sm text-secondary uppercase tracking-widest mb-2">Meta de Qualidade</p>
+<h3 class="text-display-lg font-display-lg text-primary">98<span class="text-headline-md">%</span></h3>
+<p class="text-body-md font-body-md text-[#10c871] flex items-center mt-1">
+<span class="material-symbols-outlined text-[16px] mr-1">trending_up</span> +2.4% este mês
+                        </p>
+</div>
+<!-- Simple Circular Progress Vis -->
+<div class="w-20 h-20 rounded-full border-4 border-surface-container flex items-center justify-center relative">
+<svg class="w-full h-full absolute top-0 left-0 -rotate-90" viewBox="0 0 36 36">
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="98, 100" stroke-width="4"></path>
+</svg>
+<span class="material-symbols-outlined text-primary text-[24px]">verified</span>
+</div>
+</div>
+<!-- Recent Activity List -->
+<div class="col-span-1 lg:col-span-8 bg-surface-container-lowest rounded-xl p-6 ambient-shadow border border-secondary-container">
+<div class="flex justify-between items-center mb-6 pb-4 border-b border-surface-container-high">
+<h3 class="text-title-lg font-title-lg text-on-background">Modelos Aprovados Recentemente</h3>
+<a class="text-label-sm font-label-sm text-primary hover:underline" href="{{DATA:SCREEN:SCREEN_4}}">Ver Todos</a>
+</div>
+<div class="space-y-4">
+<!-- Activity Item 1 -->
+<div class="flex items-center justify-between group hover:bg-[#F2E8E4] p-2 rounded-lg transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-md overflow-hidden bg-surface-container">
+<img alt="Scarpin Couro Preto" class="w-full h-full object-cover" data-alt="A close-up studio shot of a sleek black leather scarpin shoe. The lighting is crisp and modern, emphasizing the smooth texture of the premium leather and the sharp, elegant silhouette. The background is a clean, bright white, typical of high-end e-commerce photography, perfectly aligned with a light-mode UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7ofz9yW-eiqhVCaKg6O3wy3iceYGClegXwHRmCj-AS6LGN40sRKMsZN1EUHMBguzw9LI7cNAJrx70WnBnyGvvTIO7JVrWyy2K19g5DwJEl611lm7aRdewkL42RLIPK1ORRxDfKfik0vx25iBjYBs8vaAw3S-WhUWdu6GFLnvR5sZiuyNa7LHZxSojqSmrbhcZlVWx1vINNLCAgEnktWTeGch9chWpQ-NozE1A8HZ-mV8pPQVhxMaRCdEkoMqLHRAA8aRk-1-Pmuqv">
+</div>
+<div>
+<h4 class="text-body-lg font-body-lg font-semibold text-on-background group-hover:text-primary transition-colors">Scarpin Couro Preto V2</h4>
+<p class="text-label-sm font-label-sm text-secondary">Lote: #A492 • Ref: SL-2024</p>
+</div>
+</div>
+<div class="text-right hidden sm:block">
+<p class="text-body-md font-body-md text-on-background">Há 2 horas</p>
+<p class="text-label-sm font-label-sm text-secondary">Por: Ana Costa</p>
+</div>
+</div>
+<hr class="border-t border-surface-container-high">
+<!-- Activity Item 2 -->
+<div class="flex items-center justify-between group hover:bg-[#F2E8E4] p-2 rounded-lg transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-md overflow-hidden bg-surface-container">
+<img alt="Mule Camurça" class="w-full h-full object-cover" data-alt="A detailed macro photograph of a beige suede mule shoe. The focus is incredibly sharp on the rough, tactile texture of the suede material, giving a sense of warmth and luxury. The lighting is soft and natural, casting minimal shadows against a pristine light-gray backdrop, fitting seamlessly into an editorial fashion interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRh2VKUX21htYAuVJsMpq-t3rvbGpvsjC-04n1dM6kGOfvuwZKadh0avG_cxekPMrTPaJLrkxGLwQDMYAz3IDPCFJNTG1V6V4LnhnXAigj_j9sJmOfCPZLlYQC_wcI3KSyCSHIuNEXpYvduCjwe3K6qa9cldRCpF01oH9DR1DnFkhevWx1Ux6fPDjZUCrXuUN9Qpb7Jzv6Qam3nYMtaJyvy4l8OV5onQQig1FML9tvrv9B9RfRre-9Zv1UHGcFTp5cQbGbAYyxDlVD">
+</div>
+<div>
+<h4 class="text-body-lg font-body-lg font-semibold text-on-background group-hover:text-primary transition-colors">Mule Camurça Areia</h4>
+<p class="text-label-sm font-label-sm text-secondary">Lote: #A491 • Ref: SL-2025</p>
+</div>
+</div>
+<div class="text-right hidden sm:block">
+<p class="text-body-md font-body-md text-on-background">Ontem, 16:45</p>
+<p class="text-label-sm font-label-sm text-secondary">Por: Carlos Silva</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- MOBILE BOTTOM NAV: BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 md:hidden bg-surface-container-highest border-t border-outline-variant shadow-lg pb-safe flex justify-around items-center px-margin-mobile">
+<!-- Active: Painel -->
+<a class="flex flex-col items-center justify-center text-primary bg-primary-fixed/20 rounded-xl p-2 active:bg-surface-variant transition-transform transform active:scale-95 w-16" href="{{DATA:SCREEN:SCREEN_7}}">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="text-label-sm font-label-sm mt-1">Painel</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary p-2 active:bg-surface-variant transition-transform transform active:scale-95 w-16" href="{{DATA:SCREEN:SCREEN_2}}">
+<span class="material-symbols-outlined">auto_awesome_motion</span>
+<span class="text-label-sm font-label-sm mt-1">Coleções</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary p-2 active:bg-surface-variant transition-transform transform active:scale-95 w-16" href="{{DATA:SCREEN:SCREEN_4}}">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+<span class="text-label-sm font-label-sm mt-1">Fábrica</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary p-2 active:bg-surface-variant transition-transform transform active:scale-95 w-16" href="{{DATA:SCREEN:SCREEN_5}}">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-sm font-label-sm mt-1">Perfil</span>
+</a>
+</nav>
+
+
+</body></html>
