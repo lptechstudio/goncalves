@@ -170,7 +170,7 @@
 </div>
 <!-- Submit Button -->
 <div class="pt-4">
-<button class="w-full flex justify-center py-3 px-4 border border-transparent rounded bg-primary hover:bg-[#A0001C] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-on-surface text-on-primary font-label-sm text-label-sm uppercase tracking-widest transition-all duration-200 shadow-lg shadow-primary/20" type="button" onclick="window.location.href='{{DATA:SCREEN:SCREEN_7}}'">
+<button class="w-full flex justify-center py-3 px-4 border border-transparent rounded bg-primary hover:bg-[#A0001C] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-on-surface text-on-primary font-label-sm text-label-sm uppercase tracking-widest transition-all duration-200 shadow-lg shadow-primary/20" type="button" onclick="window.location.href='dashboard.html'">
                         Acessar Sistema
                     </button>
 </div>
@@ -199,4 +199,26 @@
     </script>
 
 
+
+<script>
+document.querySelector('button[type="button"]').addEventListener('click', function() {
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    if (!email || !password) {
+        alert('Preencha email e senha!');
+        return;
+    }
+    // Credenciais padrão
+    if (email === 'admin@calcadosgoncalves.com.br' && password === 'admin123') {
+        window.location.href = 'dashboard.html';
+    } else {
+        alert('Email ou senha incorretos!\nUse: admin@calcadosgoncalves.com.br / admin123');
+    }
+});
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        document.querySelector('button[type="button"]').click();
+    }
+});
+</script>
 </body></html>
