@@ -141,7 +141,7 @@
 <span class="material-symbols-outlined">factory</span>
 <span class="text-body-md font-body-md">Produção</span>
 </a>
-<a class="flex items-center gap-4 text-secondary-fixed px-4 py-3 hover:bg-white/10 transition-colors duration-200" href="#configuracoes">
+<a class="flex items-center gap-4 text-secondary-fixed px-4 py-3 hover:bg-white/10 transition-colors duration-200" href="configuracoes.html">
 <span class="material-symbols-outlined">settings</span>
 <span class="text-body-md font-body-md">Configurações</span>
 </a>
@@ -160,7 +160,7 @@
 <span class="text-label-sm font-label-sm text-secondary opacity-60">Gestão Industrial de Coleções</span>
 </div>
 </div>
-<button class="w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-surface-variant/50 transition-colors active:scale-95 opacity-50 pointer-events-none">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-surface-variant/50 transition-colors active:scale-95" onclick="logout()" title="Sair">
 <span class="material-symbols-outlined text-[28px]">account_circle</span>
 </button>
 </header>
@@ -317,7 +317,7 @@
 <span class="material-symbols-outlined">precision_manufacturing</span>
 <span class="text-label-sm font-label-sm mt-1">Fábrica</span>
 </a>
-<a class="flex flex-col items-center justify-center text-secondary p-2 active:bg-surface-variant transition-transform transform active:scale-95 w-16 opacity-50 pointer-events-none" href="#configuracoes">
+<a class="flex flex-col items-center justify-center text-secondary p-2 active:bg-surface-variant transition-transform transform active:scale-95 w-16 opacity-50 pointer-events-none" href="configuracoes.html">
 <span class="material-symbols-outlined">person</span>
 <span class="text-label-sm font-label-sm mt-1">Perfil</span>
 </a>
@@ -326,4 +326,15 @@
 
 
 
+
+<script>
+// Proteção de rota
+if (localStorage.getItem('cg_logged') !== 'true') {
+  window.location.href = 'index.html';
+}
+function logout() {
+  localStorage.removeItem('cg_logged');
+  window.location.href = 'index.html';
+}
+</script>
 </body></html>
