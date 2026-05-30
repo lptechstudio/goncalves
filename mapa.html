@@ -15,11 +15,11 @@
   --amarelo:#FFB300;--amarelo2:rgba(255,179,0,.12);
   --vermelho:#FF1A3C;--vermelho2:rgba(255,26,60,.12);
   --azul:#2979FF;--azul2:rgba(41,121,255,.12);
+  --roxo:#9C27B0;--roxo2:rgba(156,39,176,.12);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--preto);color:var(--txt);font-family:'DM Sans',sans-serif;min-height:100vh;}
 
-/* HEADER */
 header{background:var(--c1);border-bottom:2px solid var(--vm);padding:0 20px;height:54px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
 .logo{display:flex;align-items:center;gap:10px;}
 .logo-box{width:32px;height:32px;background:var(--vm);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',cursive;font-size:15px;color:#fff;}
@@ -31,23 +31,20 @@ header{background:var(--c1);border-bottom:2px solid var(--vm);padding:0 20px;hei
 #btn-sync:hover{background:var(--vm2);}
 #btn-sync:disabled{background:#333;cursor:wait;}
 
-/* NAV */
-.nav-tabs{background:var(--c1);border-bottom:1px solid var(--borda);display:flex;padding:0 20px;}
+.nav-tabs{background:var(--c1);border-bottom:1px solid var(--borda);display:flex;padding:0 20px;overflow-x:auto;}
 .nav-tab{padding:10px 18px;font-size:12px;font-weight:600;color:var(--txt2);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;}
 .nav-tab:hover{color:var(--txt);}
 .nav-tab.ativo{color:var(--vm);border-bottom-color:var(--vm);}
 
-/* LOADING */
 #loading{display:flex;flex-direction:column;align-items:center;justify-content:center;height:70vh;gap:16px;}
 .spinner{width:40px;height:40px;border:3px solid var(--borda);border-top-color:var(--vm);border-radius:50%;animation:spin .7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 #loading p{font-size:13px;color:var(--txt2);}
 
-/* PÁGINAS */
 .page{display:none;padding:16px 20px;}
 .page.ativo{display:block;}
 
-/* ===== VISÃO GERAL ===== */
+/* VISÃO GERAL */
 .meta-bar{background:var(--c2);border:1px solid var(--borda);border-radius:10px;padding:12px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
 .meta-bar label{font-size:12px;color:var(--txt2);font-weight:600;white-space:nowrap;}
 .meta-input{background:var(--c3);border:1px solid var(--borda);color:var(--txt);padding:6px 12px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;width:120px;outline:none;text-align:center;}
@@ -80,7 +77,7 @@ header{background:var(--c1);border-bottom:2px solid var(--vm);padding:0 20px;hei
 .fc-top{display:flex;align-items:center;justify-content:space-between;}
 .fc-codigo{font-size:10px;font-weight:700;color:var(--txt2);}
 .fc-dot{width:8px;height:8px;border-radius:50%;}
-.fc-nome{font-size:10px;font-weight:700;color:var(--txt);text-transform:uppercase;letter-spacing:.3px;}
+.fc-nome{font-size:10px;font-weight:700;color:var(--txt);text-transform:uppercase;}
 .fc-valor{font-family:'Bebas Neue',cursive;font-size:26px;line-height:1;}
 .fc-total{font-size:10px;color:var(--txt2);}
 .fc-bar{height:4px;background:var(--borda);border-radius:2px;overflow:hidden;}
@@ -99,7 +96,6 @@ header{background:var(--c1);border-bottom:2px solid var(--vm);padding:0 20px;hei
 .badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;white-space:nowrap;}
 .badge-vm{background:var(--vermelho2);color:var(--vermelho);}
 .badge-am{background:var(--amarelo2);color:var(--amarelo);}
-.badge-vd{background:var(--verde2);color:var(--verde);}
 .mdi{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--borda);}
 .mdi:last-child{border-bottom:none;}
 .mdi-ico{width:34px;height:34px;background:var(--c3);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
@@ -111,109 +107,84 @@ header{background:var(--c1);border-bottom:2px solid var(--vm);padding:0 20px;hei
 .mdi-bar{width:55px;height:4px;background:var(--borda);border-radius:2px;overflow:hidden;}
 .mdi-bf{height:100%;border-radius:2px;}
 
-/* ===== MAPA DE PRODUÇÃO - LAYOUT TIPO EXCEL ===== */
+/* TABELA COMPARTILHADA (Mapa + Almox) */
 .mapa-filtros{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center;}
 .mapa-filtros input,.mapa-filtros select{background:var(--c2);border:1px solid var(--borda);color:var(--txt);padding:7px 11px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;outline:none;transition:border .2s;}
 .mapa-filtros input:focus,.mapa-filtros select:focus{border-color:var(--vm);}
 .mapa-filtros input{min-width:200px;}
-#stats-mapa{font-size:11px;color:var(--txt2);margin-left:auto;}
-#stats-mapa b{color:var(--txt);}
+.stats-label{font-size:11px;color:var(--txt2);margin-left:auto;}
+.stats-label b{color:var(--txt);}
 
-/* TABELA ESTILO MAPA */
-.mapa-table-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--borda);}
-.mapa-table{width:100%;border-collapse:collapse;font-size:11px;min-width:900px;}
+.table-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--borda);}
+.prod-table{width:100%;border-collapse:collapse;font-size:11px;min-width:800px;}
 
-/* CABEÇALHO */
-.mapa-table thead tr.hd-top th{
-  background:var(--vm);color:#fff;
+/* CABEÇALHOS */
+.prod-table thead tr.hd-grupo th{
+  background:var(--c3);color:var(--txt2);
+  padding:5px 10px;text-align:center;
+  font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  border-right:1px solid var(--borda2);border-bottom:1px solid var(--borda2);
+}
+.prod-table thead tr.hd-grupo th.al{text-align:left;}
+
+.prod-table thead tr.hd-top th{
   padding:8px 10px;text-align:center;
-  font-size:10px;font-weight:700;letter-spacing:.5px;
-  text-transform:uppercase;white-space:nowrap;
-  border-right:1px solid rgba(255,255,255,.15);
+  font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  white-space:nowrap;border-right:1px solid rgba(255,255,255,.1);border-bottom:none;
 }
-.mapa-table thead tr.hd-top th.al{text-align:left;}
-.mapa-table thead tr.hd-top th:last-child{border-right:none;}
+.prod-table thead tr.hd-top th.al{text-align:left;}
+.prod-table thead tr.hd-top th:last-child{border-right:none;}
 
-/* LINHA MODELO (agrupador principal) */
-.mapa-table tr.linha-modelo td{
-  background:var(--c2);
-  color:var(--txt);
-  font-family:'Bebas Neue',cursive;
-  font-size:15px;
-  letter-spacing:1px;
-  padding:10px 12px;
-  border-bottom:1px solid var(--borda2);
-  border-top:2px solid var(--vm);
-  cursor:pointer;
-  transition:background .15s;
-  white-space:nowrap;
+/* Cores de cabeçalho por seção */
+.th-info{background:#1a1a2e;color:#7986CB;}
+.th-prod{background:#1a2a1a;color:#66BB6A;}
+.th-almox{background:#2a1a2a;color:#CE93D8;}
+
+/* LINHAS */
+.prod-table tr.linha-modelo td{
+  background:var(--c2);color:var(--txt);
+  font-family:'Bebas Neue',cursive;font-size:15px;letter-spacing:1px;
+  padding:10px 12px;border-bottom:1px solid var(--borda2);
+  border-top:2px solid var(--vm);cursor:pointer;transition:background .15s;white-space:nowrap;
 }
-.mapa-table tr.linha-modelo:hover td{background:var(--c3);}
-.mapa-table tr.linha-modelo td .modelo-chevron{font-size:10px;color:var(--txt2);transition:transform .2s;display:inline-block;margin-right:6px;}
-.mapa-table tr.linha-modelo.aberto td .modelo-chevron{transform:rotate(90deg);}
-.mapa-table tr.linha-modelo td .modelo-total{font-size:12px;color:var(--txt2);font-family:'DM Sans',sans-serif;margin-left:8px;}
+.prod-table tr.linha-modelo:hover td{background:var(--c3);}
+.modelo-chevron{font-size:10px;color:var(--txt2);transition:transform .2s;display:inline-block;margin-right:6px;}
+.prod-table tr.linha-modelo.aberto td .modelo-chevron{transform:rotate(90deg);}
+.modelo-info{font-size:11px;color:var(--txt2);font-family:'DM Sans',sans-serif;margin-left:8px;}
 
-/* LINHA GRUPO (subagrupador) */
-.mapa-table tr.linha-grupo td{
-  background:var(--c3);
-  color:var(--txt);
-  font-size:11px;font-weight:700;
-  padding:7px 10px 7px 24px;
-  border-bottom:1px solid var(--borda);
-  border-top:1px solid var(--borda2);
-  white-space:nowrap;
+.prod-table tr.linha-grupo td{
+  background:var(--c3);color:var(--txt);font-size:11px;font-weight:700;
+  padding:7px 10px 7px 24px;border-bottom:1px solid var(--borda);
+  border-top:1px solid var(--borda2);white-space:nowrap;
 }
-.mapa-table tr.linha-grupo td .grupo-nome{color:var(--amarelo);}
-.mapa-table tr.linha-grupo td .grupo-total{font-size:11px;font-weight:700;color:var(--txt);}
+.grupo-nome{color:var(--amarelo);}
 
-/* LINHA REMESSA (dados) */
-.mapa-table tr.linha-remessa td{
-  padding:7px 10px;
-  border-bottom:1px solid var(--borda);
-  color:var(--txt2);
-  white-space:nowrap;
-  transition:background .1s;
+.prod-table tr.linha-remessa td{
+  padding:7px 10px;border-bottom:1px solid var(--borda);
+  color:var(--txt2);white-space:nowrap;text-align:center;transition:background .1s;
 }
-.mapa-table tr.linha-remessa:hover td{background:rgba(255,255,255,.02);}
-.mapa-table tr.linha-remessa td{text-align:center;}
-.mapa-table tr.linha-remessa td.al{text-align:left;padding-left:24px;}
+.prod-table tr.linha-remessa:hover td{background:rgba(255,255,255,.02);}
+.prod-table tr.linha-remessa td.al{text-align:left;padding-left:32px;}
 
-/* LINHA SUBTOTAL GRUPO */
-.mapa-table tr.linha-subtotal td{
-  background:rgba(255,179,0,.06);
-  padding:6px 10px;
-  border-bottom:1px solid var(--borda2);
-  font-size:10px;font-weight:700;
-  color:var(--amarelo);
-  text-align:center;white-space:nowrap;
+.prod-table tr.linha-subtotal td{
+  background:rgba(255,179,0,.06);padding:6px 10px;
+  border-bottom:1px solid var(--borda2);font-size:10px;font-weight:700;
+  color:var(--amarelo);text-align:center;white-space:nowrap;
 }
-.mapa-table tr.linha-subtotal td.al{text-align:left;padding-left:24px;}
+.prod-table tr.linha-subtotal td.al{text-align:left;padding-left:24px;}
 
-/* LINHA TOTAL MODELO */
-.mapa-table tr.linha-total td{
-  background:rgba(184,0,31,.08);
-  padding:8px 10px;
-  border-bottom:2px solid var(--vm);
-  font-size:11px;font-weight:700;
-  color:var(--txt);
-  text-align:center;white-space:nowrap;
+.prod-table tr.linha-total td{
+  background:rgba(184,0,31,.08);padding:8px 10px;
+  border-bottom:2px solid var(--vm);font-size:11px;font-weight:700;
+  color:var(--txt);text-align:center;white-space:nowrap;
 }
-.mapa-table tr.linha-total td.al{text-align:left;}
+.prod-table tr.linha-total td.al{text-align:left;}
 
-/* CÉLULA SETOR */
+/* CÉLULAS SETOR */
 .sc-cell{display:flex;flex-direction:column;align-items:center;gap:1px;min-width:38px;}
 .sc-bola{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;}
 .sc-ok{background:var(--verde2);color:var(--verde);}
 .sc-pend{background:var(--vermelho2);color:var(--vermelho);}
-.sc-zero{background:var(--c4);color:var(--txt3);}
-
-/* CORES DAS COLUNAS SETOR */
-.col-setor{background:rgba(255,255,255,.01);}
-
-/* BTN COMENTÁRIO */
-.btn-com{background:none;border:1px solid var(--borda);color:var(--txt2);padding:3px 6px;border-radius:4px;cursor:pointer;font-size:10px;transition:all .2s;}
-.btn-com:hover{border-color:var(--vm);color:var(--txt);}
-.btn-com.ativo{border-color:var(--amarelo);color:var(--amarelo);}
 
 /* MODAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;align-items:center;justify-content:center;padding:16px;}
@@ -231,7 +202,6 @@ header{background:var(--c1);border-bottom:2px solid var(--vm);padding:0 20px;hei
 .btn-cancel{background:none;border:1px solid var(--borda);color:var(--txt2);padding:6px 12px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;}
 .btn-save{background:var(--vm);border:none;color:#fff;padding:6px 16px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;}
 
-/* MOBILE */
 @media(max-width:640px){
   header{padding:0 12px;}
   .nav-tab{padding:10px 12px;font-size:11px;}
@@ -262,6 +232,7 @@ header{background:var(--c1);border-bottom:2px solid var(--vm);padding:0 20px;hei
 <div class="nav-tabs">
   <div class="nav-tab ativo" onclick="mudarPagina('visao')">🏠 Visão Geral</div>
   <div class="nav-tab" onclick="mudarPagina('mapa')">📋 Mapa de Produção</div>
+  <div class="nav-tab" onclick="mudarPagina('almox')">📦 Almoxarifado</div>
 </div>
 
 <div id="loading"><div class="spinner"></div><p>Carregando dados...</p></div>
@@ -290,41 +261,81 @@ header{background:var(--c1);border-bottom:2px solid var(--vm);padding:0 20px;hei
 <!-- MAPA DE PRODUÇÃO -->
 <div class="page" id="page-mapa">
   <div class="mapa-filtros">
-    <input type="text" id="busca" placeholder="🔍 Buscar modelo, cor, grupo, remessa..." oninput="filtrar()">
-    <select id="f-grupo" onchange="filtrar()"><option value="">Todos os grupos</option></select>
-    <select id="f-data" onchange="filtrar()"><option value="">Todas as entregas</option></select>
-    <div id="stats-mapa"></div>
+    <input type="text" id="busca-mapa" placeholder="🔍 Buscar modelo, cor, grupo, remessa..." oninput="filtrarMapa()">
+    <select id="fg-mapa" onchange="filtrarMapa()"><option value="">Todos os grupos</option></select>
+    <select id="fd-mapa" onchange="filtrarMapa()"><option value="">Todas as entregas</option></select>
+    <div class="stats-label" id="stats-mapa"></div>
   </div>
-  <div class="mapa-table-wrap">
-    <table class="mapa-table" id="mapa-table">
+  <div class="table-wrap">
+    <table class="prod-table">
       <thead>
+        <tr class="hd-grupo">
+          <th class="al th-info" colspan="7">INFORMAÇÕES</th>
+          <th class="th-prod" colspan="10">PRODUÇÃO</th>
+        </tr>
         <tr class="hd-top">
-          <th class="al" style="min-width:90px">Modelo</th>
-          <th class="al" style="min-width:140px">Grupo</th>
-          <th style="min-width:60px">Forma</th>
-          <th style="min-width:60px">Const.</th>
-          <th style="min-width:90px">Entrega</th>
-          <th class="al" style="min-width:160px">Cor</th>
-          <th style="min-width:70px">Remessa</th>
-          <th style="min-width:60px">Total</th>
-          <th style="min-width:50px">Produz.</th>
-          <th style="min-width:44px">10 ALM</th>
-          <th style="min-width:44px">20 COR</th>
-          <th style="min-width:44px">30 COS</th>
-          <th style="min-width:44px">40 COS</th>
-          <th style="min-width:44px">45 PAL</th>
-          <th style="min-width:44px">60 PRE</th>
-          <th style="min-width:44px">70 AGR</th>
-          <th style="min-width:44px">80 MON</th>
-          <th style="min-width:44px">💬</th>
+          <th class="al th-info">Modelo</th>
+          <th class="al th-info">Grupo</th>
+          <th class="th-info">Forma</th>
+          <th class="th-info">Const.</th>
+          <th class="th-info">Entrega</th>
+          <th class="al th-info">Cor</th>
+          <th class="th-info">Remessa</th>
+          <th class="th-prod">Total</th>
+          <th class="th-prod">Produz.</th>
+          <th class="th-prod">20 COR</th>
+          <th class="th-prod">30 COS</th>
+          <th class="th-prod">40 COS</th>
+          <th class="th-prod">45 PAL</th>
+          <th class="th-prod">60 PRE</th>
+          <th class="th-prod">70 AGR</th>
+          <th class="th-prod">80 MON</th>
+          <th class="th-prod">95 EXP</th>
         </tr>
       </thead>
-      <tbody id="mapa-tbody"></tbody>
+      <tbody id="tbody-mapa"></tbody>
     </table>
   </div>
 </div>
 
-<!-- MODAL -->
+<!-- ALMOXARIFADO -->
+<div class="page" id="page-almox">
+  <div class="mapa-filtros">
+    <input type="text" id="busca-almox" placeholder="🔍 Buscar modelo, cor, grupo, remessa..." oninput="filtrarAlmox()">
+    <select id="fg-almox" onchange="filtrarAlmox()"><option value="">Todos os grupos</option></select>
+    <select id="fd-almox" onchange="filtrarAlmox()"><option value="">Todas as entregas</option></select>
+    <div class="stats-label" id="stats-almox"></div>
+  </div>
+  <div class="table-wrap">
+    <table class="prod-table">
+      <thead>
+        <tr class="hd-grupo">
+          <th class="al th-info" colspan="7">INFORMAÇÕES</th>
+          <th class="th-almox" colspan="7">ALMOXARIFADO / MATERIAIS</th>
+        </tr>
+        <tr class="hd-top">
+          <th class="al th-info">Modelo</th>
+          <th class="al th-info">Grupo</th>
+          <th class="th-info">Forma</th>
+          <th class="th-info">Const.</th>
+          <th class="th-info">Entrega</th>
+          <th class="al th-info">Cor</th>
+          <th class="th-info">Remessa</th>
+          <th class="th-almox">Total</th>
+          <th class="th-almox">10<br><small>Couro e Sint.</small></th>
+          <th class="th-almox">12<br><small>SL</small></th>
+          <th class="th-almox">41<br><small>Forro</small></th>
+          <th class="th-almox">42<br><small>Enf.</small></th>
+          <th class="th-almox">44<br><small>Palm. Saída</small></th>
+          <th class="th-almox">50<br><small>Pré Saída</small></th>
+        </tr>
+      </thead>
+      <tbody id="tbody-almox"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- MODAL COMENTÁRIO -->
 <div class="overlay" id="overlay">
   <div class="modal">
     <h3 id="m-titulo"></h3>
@@ -341,18 +352,26 @@ header{background:var(--c1);border-bottom:2px solid var(--vm);padding:0 20px;hei
 <script>
 const SHEET_ID='1lWix0sry-XtQHN5h5RhXsjboGge9YtUq-uSxcplGUgY';
 const SHEET_NAME='Mapa de Produção';
-const SETORES=[
-  {k:'10_ALM',l:'10 ALM'},{k:'20_COR',l:'20 COR'},{k:'30_COS',l:'30 COS'},
-  {k:'40_COS',l:'40 COS'},{k:'45_PAL',l:'45 PAL'},{k:'60_PRE',l:'60 PRE'},
-  {k:'70_AGR',l:'70 AGR'},{k:'80_MON',l:'80 MON'},
+
+const SET_PROD=[
+  {k:'20_COR',l:'20 COR'},{k:'30_COS',l:'30 COS'},{k:'40_COS',l:'40 COS'},
+  {k:'45_PAL',l:'45 PAL'},{k:'60_PRE',l:'60 PRE'},{k:'70_AGR',l:'70 AGR'},
+  {k:'80_MON',l:'80 MON'},{k:'nao_exp',l:'95 EXP'},
+];
+const SET_ALMOX=[
+  {k:'10_ALM',l:'10'},{k:'12_SL',l:'12'},{k:'41_TAL',l:'41'},
+  {k:'42_ENF',l:'42'},{k:'44_PAL',l:'44'},{k:'50_PRE',l:'50'},
 ];
 const SETOR_NOMES={
-  '10_ALM':'Almoxarifado','20_COR':'Corte','30_COS':'Costura',
-  '40_COS':'Costura 2','45_PAL':'Palmilha','60_PRE':'Preparação',
-  '70_AGR':'Agrupamento','80_MON':'Montagem'
+  '20_COR':'Corte','30_COS':'Costura','40_COS':'Costura 2',
+  '45_PAL':'Palmilha','60_PRE':'Preparação','70_AGR':'Agrupamento',
+  '80_MON':'Montagem','nao_exp':'Expedição',
+  '10_ALM':'Couro e Sint.','12_SL':'SL','41_TAL':'Forro',
+  '42_ENF':'Enf.','44_PAL':'Palm. Saída','50_PRE':'Pré Saída',
 };
 
-let todos=[],filtrados=[],abertos=new Set();
+let todos=[],filtMapa=[],filtAlmox=[];
+let abMapa=new Set(),abAlmox=new Set();
 let comentarios=JSON.parse(localStorage.getItem('cg_com')||'{}');
 let modalRemessa=null,paginaAtual='visao';
 
@@ -367,10 +386,9 @@ function fmtData(v){
   }catch(e){}
   return v;
 }
-
-function corProg(p){return p>=75?'verde':p>=40?'amarelo':'vermelho';}
 function hexProg(p){return p>=75?'var(--verde)':p>=40?'var(--amarelo)':'var(--vermelho)';}
-function prog(r){return Math.round(SETORES.filter(s=>(r[s.k]||0)===0).length/SETORES.length*100);}
+function corProg(p){return p>=75?'verde':p>=40?'amarelo':'vermelho';}
+function progProd(r){return Math.round(SET_PROD.filter(s=>(r[s.k]||0)===0).length/SET_PROD.length*100);}
 function salvarMeta(){localStorage.setItem('cg_meta',document.getElementById('meta-input').value||0);}
 function carregarMeta(){document.getElementById('meta-input').value=localStorage.getItem('cg_meta')||'';}
 
@@ -394,10 +412,14 @@ async function carregar(){
         '40_COS':parseFloat(v[19])||0,'45_PAL':parseFloat(v[20])||0,
         '60_PRE':parseFloat(v[21])||0,'70_AGR':parseFloat(v[22])||0,
         '80_MON':parseFloat(v[23])||0,'nao_exp':parseFloat(v[24])||0,
-        '10_ALM':parseFloat(v[25])||0,
+        '10_ALM':parseFloat(v[25])||0,'12_SL':parseFloat(v[26])||0,
+        '41_TAL':parseFloat(v[27])||0,'42_ENF':parseFloat(v[28])||0,
+        '44_PAL':parseFloat(v[29])||0,'50_PRE':parseFloat(v[30])||0,
       };
     }).filter(r=>r.remessa&&r.modelo&&!r.modelo.toString().toUpperCase().includes('TOTAL'));
-    carregarMeta();popularFiltros();filtrar();atualizarVisao();
+
+    carregarMeta();popularFiltros();
+    filtrarMapa();filtrarAlmox();atualizarVisao();
     document.getElementById('sync-time').textContent='Atualizado: '+new Date().toLocaleTimeString('pt-BR');
     document.getElementById('loading').style.display='none';
     mudarPagina(paginaAtual);
@@ -409,7 +431,7 @@ async function carregar(){
 
 function mudarPagina(pg){
   paginaAtual=pg;
-  document.querySelectorAll('.nav-tab').forEach((t,i)=>{t.classList.toggle('ativo',['visao','mapa'][i]===pg);});
+  document.querySelectorAll('.nav-tab').forEach((t,i)=>{t.classList.toggle('ativo',['visao','mapa','almox'][i]===pg);});
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('ativo'));
   const el=document.getElementById('page-'+pg);
   if(el)el.classList.add('ativo');
@@ -432,7 +454,7 @@ function atualizarVisao(){
     <div class="card-r alerta"><div class="cr-icon">⚠️</div><div class="cr-label">Atenção</div><div class="cr-valor vermelho">${atrasadas}</div><div class="cr-sub">remessas com pendência</div></div>
   `;
 
-  document.getElementById('fluxo-grid').innerHTML=SETORES.map(s=>{
+  document.getElementById('fluxo-grid').innerHTML=SET_PROD.map(s=>{
     const pend=todos.reduce((sum,r)=>sum+(r[s.k]||0),0);
     const tot=todos.reduce((sum,r)=>sum+r.total,0);
     const p=tot>0?Math.round((1-pend/tot)*100):100;
@@ -441,21 +463,20 @@ function atualizarVisao(){
   }).join('');
 
   const alertas=[];
-  SETORES.forEach(s=>{
+  SET_PROD.forEach(s=>{
     const pend=todos.reduce((sum,r)=>sum+(r[s.k]||0),0);
     const tot=todos.reduce((sum,r)=>sum+r.total,0);
     const p=tot>0?Math.round((1-pend/tot)*100):100;
-    if(p<40&&pend>0)alertas.push({tipo:'vermelho',titulo:`Gargalo: ${SETOR_NOMES[s.k]}`,sub:`${pend} pares aguardando`,badge:'Atraso',bc:'badge-vm'});
-    else if(p<75&&pend>0)alertas.push({tipo:'amarelo',titulo:`Atenção: ${SETOR_NOMES[s.k]}`,sub:`${pend} pares pendentes`,badge:'Atenção',bc:'badge-am'});
+    if(p<40&&pend>0)alertas.push({tipo:'vermelho',titulo:`Gargalo: ${SETOR_NOMES[s.k]}`,sub:`${pend} pares aguardando`,bc:'badge-vm',badge:'Atraso'});
+    else if(p<75&&pend>0)alertas.push({tipo:'amarelo',titulo:`Atenção: ${SETOR_NOMES[s.k]}`,sub:`${pend} pares pendentes`,bc:'badge-am',badge:'Atenção'});
   });
   document.getElementById('alertas-lista').innerHTML=alertas.length
     ?alertas.slice(0,5).map(a=>`<div class="alerta-item"><div class="alerta-dot" style="background:var(--${a.tipo})"></div><div class="alerta-info"><div class="alerta-tit">${a.titulo}</div><div class="alerta-sub">${a.sub}</div></div><span class="badge ${a.bc}">${a.badge}</span></div>`).join('')
-    :'<div style="font-size:12px;color:var(--verde);padding:8px 0">✅ Nenhum alerta no momento</div>';
+    :'<div style="font-size:12px;color:var(--verde);padding:8px 0">✅ Nenhum alerta</div>';
 
   const pm={};
   todos.forEach(r=>{if(!pm[r.modelo])pm[r.modelo]={total:0,pendente:0};pm[r.modelo].total+=r.total;pm[r.modelo].pendente+=r.nao_exp||0;});
-  const top5=Object.entries(pm).sort((a,b)=>b[1].total-a[1].total).slice(0,5);
-  document.getElementById('modelos-dest').innerHTML=top5.map(([ref,d])=>{
+  document.getElementById('modelos-dest').innerHTML=Object.entries(pm).sort((a,b)=>b[1].total-a[1].total).slice(0,5).map(([ref,d])=>{
     const p=d.total>0?Math.round((1-d.pendente/d.total)*100):100;const h=hexProg(p);
     return`<div class="mdi"><div class="mdi-ico">👟</div><div class="mdi-info"><div class="mdi-ref">${ref}</div><div class="mdi-sub">${d.total} pares · ${d.pendente} pendentes</div></div><div class="mdi-right"><div class="mdi-pct" style="color:${h}">${p}%</div><div class="mdi-bar"><div class="mdi-bf" style="width:${p}%;background:${h}"></div></div></div></div>`;
   }).join('');
@@ -464,24 +485,28 @@ function atualizarVisao(){
 function popularFiltros(){
   const grupos=[...new Set(todos.map(r=>r.grupo))].sort();
   const datas=[...new Set(todos.map(r=>r.data_entrega).filter(Boolean))].sort();
-  const sg=document.getElementById('f-grupo');
-  sg.innerHTML='<option value="">Todos os grupos</option>';
-  grupos.forEach(g=>{const o=document.createElement('option');o.value=g;o.textContent=g;sg.appendChild(o);});
-  const sd=document.getElementById('f-data');
-  sd.innerHTML='<option value="">Todas as entregas</option>';
-  datas.forEach(d=>{const o=document.createElement('option');o.value=d;o.textContent=fmtData(d);sd.appendChild(o);});
+  ['mapa','almox'].forEach(id=>{
+    const sg=document.getElementById(`fg-${id}`);
+    sg.innerHTML='<option value="">Todos os grupos</option>';
+    grupos.forEach(g=>{const o=document.createElement('option');o.value=g;o.textContent=g;sg.appendChild(o);});
+    const sd=document.getElementById(`fd-${id}`);
+    sd.innerHTML='<option value="">Todas as entregas</option>';
+    datas.forEach(d=>{const o=document.createElement('option');o.value=d;o.textContent=fmtData(d);sd.appendChild(o);});
+  });
 }
 
-function filtrar(){
-  const busca=document.getElementById('busca').value.toLowerCase();
-  const grupo=document.getElementById('f-grupo').value;
-  const data=document.getElementById('f-data').value;
-  filtrados=todos.filter(r=>{
+function getFiltrados(prefixo){
+  const busca=document.getElementById(`busca-${prefixo}`).value.toLowerCase();
+  const grupo=document.getElementById(`fg-${prefixo}`).value;
+  const data=document.getElementById(`fd-${prefixo}`).value;
+  return todos.filter(r=>{
     const mb=!busca||r.modelo.toLowerCase().includes(busca)||r.cor.toLowerCase().includes(busca)||String(r.remessa).includes(busca)||r.grupo.toLowerCase().includes(busca);
     return mb&&(!grupo||r.grupo===grupo)&&(!data||r.data_entrega===data);
   });
-  renderizarMapa();
 }
+
+function filtrarMapa(){filtMapa=getFiltrados('mapa');renderTabela('mapa',filtMapa,SET_PROD,abMapa,'stats-mapa','tbody-mapa');}
+function filtrarAlmox(){filtAlmox=getFiltrados('almox');renderTabela('almox',filtAlmox,SET_ALMOX,abAlmox,'stats-almox','tbody-almox');}
 
 function renderSetor(v){
   const n=parseFloat(v)||0;
@@ -489,106 +514,86 @@ function renderSetor(v){
   return`<div class="sc-cell"><div class="sc-bola sc-pend">${n}</div></div>`;
 }
 
-function renderizarMapa(){
-  const tbody=document.getElementById('mapa-tbody');
-  if(!filtrados.length){
-    tbody.innerHTML=`<tr><td colspan="18" style="text-align:center;padding:40px;color:var(--txt2)">Nenhuma remessa encontrada.</td></tr>`;
-    document.getElementById('stats-mapa').innerHTML='';
-    return;
+function renderTabela(tipo,lista,setores,abertos,statsId,tbodyId){
+  const tbody=document.getElementById(tbodyId);
+  if(!lista.length){
+    tbody.innerHTML=`<tr><td colspan="20" style="text-align:center;padding:40px;color:var(--txt2)">Nenhuma remessa encontrada.</td></tr>`;
+    document.getElementById(statsId).innerHTML='';return;
   }
-
-  // Agrupar: modelo → grupo → remessas
   const porModelo={};
-  filtrados.forEach(r=>{
+  lista.forEach(r=>{
     if(!porModelo[r.modelo])porModelo[r.modelo]={remessas:[],grupos:{}};
     porModelo[r.modelo].remessas.push(r);
     if(!porModelo[r.modelo].grupos[r.grupo])porModelo[r.modelo].grupos[r.grupo]=[];
     porModelo[r.modelo].grupos[r.grupo].push(r);
   });
-
-  const totalModelos=Object.keys(porModelo).length;
-  document.getElementById('stats-mapa').innerHTML=`<b>${filtrados.length}</b> remessas em <b>${totalModelos}</b> modelos`;
+  document.getElementById(statsId).innerHTML=`<b>${lista.length}</b> remessas em <b>${Object.keys(porModelo).length}</b> modelos`;
 
   let html='';
   Object.entries(porModelo).sort(([a],[b])=>a.localeCompare(b)).forEach(([modelo,data])=>{
-    const totalModelo=data.remessas.reduce((s,r)=>s+r.total,0);
-    const prodModelo=data.remessas.reduce((s,r)=>s+(r.total-(r.nao_exp||0)),0);
+    const totalM=data.remessas.reduce((s,r)=>s+r.total,0);
+    const prodM=data.remessas.reduce((s,r)=>s+(r.total-(r.nao_exp||0)),0);
     const aberto=abertos.has(modelo);
-    const mid=`m_${modelo.replace(/[^a-zA-Z0-9]/g,'_')}`;
+    const mid=`${tipo}_${modelo.replace(/[^a-zA-Z0-9]/g,'_')}`;
+    const nCols=7+setores.length+1;
 
-    // LINHA MODELO
-    html+=`<tr class="linha-modelo ${aberto?'aberto':''}" id="${mid}" onclick="toggleModelo('${modelo}','${mid}')">
-      <td colspan="18">
+    html+=`<tr class="linha-modelo ${aberto?'aberto':''}" id="${mid}" onclick="toggleRow('${modelo}','${mid}','${tipo}')">
+      <td colspan="${nCols}">
         <span class="modelo-chevron">▶</span>
         <strong>${modelo}</strong>
-        <span class="modelo-total">${totalModelo} pares · ${Object.keys(data.grupos).length} grupos · ${data.remessas.length} remessas · Produzido: ${prodModelo}</span>
+        <span class="modelo-info">${totalM} pares · ${Object.keys(data.grupos).length} grupos · ${data.remessas.length} remessas${tipo==='mapa'?' · Produzido: '+prodM:''}</span>
       </td>
     </tr>`;
 
     if(aberto){
-      // Para cada grupo dentro do modelo
       Object.entries(data.grupos).sort(([a],[b])=>a.localeCompare(b)).forEach(([grupo,remessas])=>{
-        const totalGrupo=remessas.reduce((s,r)=>s+r.total,0);
-        const setoresGrupo=SETORES.map(s=>remessas.reduce((sum,r)=>sum+(r[s.k]||0),0));
+        const totalG=remessas.reduce((s,r)=>s+r.total,0);
+        const setG=setores.map(s=>remessas.reduce((sum,r)=>sum+(r[s.k]||0),0));
 
-        // LINHA GRUPO
         html+=`<tr class="linha-grupo">
-          <td class="al" colspan="8"><span class="grupo-nome">▸ ${grupo}</span></td>
-          <td></td>
-          ${setoresGrupo.map(v=>`<td style="text-align:center;font-size:10px;color:var(--txt2)">${v>0?v:'—'}</td>`).join('')}
-          <td></td>
+          <td class="al" colspan="7"><span class="grupo-nome">▸ ${grupo}</span></td>
+          <td style="text-align:center;font-weight:700;color:var(--txt)">${totalG}</td>
+          ${setG.map(v=>`<td style="text-align:center;font-size:10px;color:var(--txt2)">${v>0?v:'—'}</td>`).join('')}
         </tr>`;
 
-        // LINHAS REMESSA
         remessas.forEach(r=>{
-          const prod=r.total-(r.nao_exp||0);
-          const temCom=comentarios[r.remessa]?.length>0;
           html+=`<tr class="linha-remessa">
-            <td class="al" style="padding-left:32px;color:var(--txt3);font-size:10px"></td>
-            <td class="al" style="padding-left:32px;color:var(--txt2);font-size:10px;max-width:150px;overflow:hidden;text-overflow:ellipsis" title="${r.cor}">${r.cor}</td>
+            <td class="al"></td>
+            <td class="al" style="font-size:10px;color:var(--txt2);max-width:150px;overflow:hidden;text-overflow:ellipsis" title="${r.cor}">${r.cor}</td>
             <td style="font-size:11px">${r.forma||'—'}</td>
             <td style="font-size:11px">${r.construcao||'—'}</td>
             <td style="font-size:11px;color:var(--amarelo);font-weight:600">${fmtData(r.data_entrega)}</td>
-            <td class="al" style="padding-left:8px;font-size:10px;color:var(--txt2)" colspan="0"></td>
+            <td class="al"></td>
             <td style="font-family:monospace;font-size:10px;color:var(--txt3)">${r.remessa}</td>
             <td style="font-weight:700;color:var(--txt)">${r.total}</td>
-            <td style="font-weight:700;color:var(--verde)">${prod}</td>
-            ${SETORES.map(s=>renderSetor(r[s.k])).map(sc=>`<td class="col-setor">${sc}</td>`).join('')}
-            <td><button class="btn-com ${temCom?'ativo':''}" onclick="abrirModal('${r.remessa}','${modelo}','${r.cor.replace(/'/g,"\\'")}','${grupo.replace(/'/g,"\\'")}')">
-              ${temCom?'💬':'+'}</button></td>
+            ${setores.map(s=>`<td>${renderSetor(r[s.k])}</td>`).join('')}
           </tr>`;
         });
 
-        // SUBTOTAL GRUPO
         html+=`<tr class="linha-subtotal">
           <td class="al" colspan="7">Subtotal ${grupo}</td>
-          <td>${totalGrupo}</td>
-          <td>${remessas.reduce((s,r)=>s+(r.total-(r.nao_exp||0)),0)}</td>
-          ${setoresGrupo.map(v=>`<td>${v>0?v:'✓'}</td>`).join('')}
-          <td></td>
+          <td>${totalG}</td>
+          ${setG.map(v=>`<td>${v>0?v:'✓'}</td>`).join('')}
         </tr>`;
       });
 
-      // TOTAL MODELO
-      const totSetores=SETORES.map(s=>data.remessas.reduce((sum,r)=>sum+(r[s.k]||0),0));
+      const totS=setores.map(s=>data.remessas.reduce((sum,r)=>sum+(r[s.k]||0),0));
       html+=`<tr class="linha-total">
         <td class="al" colspan="7">TOTAL ${modelo}</td>
-        <td>${totalModelo}</td>
-        <td>${prodModelo}</td>
-        ${totSetores.map(v=>`<td>${v>0?v:'✓'}</td>`).join('')}
-        <td></td>
+        <td>${totalM}</td>
+        ${totS.map(v=>`<td>${v>0?v:'✓'}</td>`).join('')}
       </tr>`;
     }
   });
-
   tbody.innerHTML=html;
 }
 
-function toggleModelo(modelo,mid){
+function toggleRow(modelo,mid,tipo){
+  const abertos=tipo==='mapa'?abMapa:abAlmox;
   const row=document.getElementById(mid);
   if(abertos.has(modelo)){abertos.delete(modelo);row.classList.remove('aberto');}
   else{abertos.add(modelo);row.classList.add('aberto');}
-  filtrar();
+  tipo==='mapa'?filtrarMapa():filtrarAlmox();
 }
 
 function abrirModal(remessa,modelo,cor,grupo){
@@ -596,9 +601,9 @@ function abrirModal(remessa,modelo,cor,grupo){
   document.getElementById('m-titulo').textContent=modelo+' · '+grupo;
   document.getElementById('m-sub').textContent='Remessa '+remessa+' · '+cor;
   document.getElementById('m-txt').value='';
-  const lista=document.getElementById('m-lista');
   const comms=comentarios[remessa]||[];
-  lista.innerHTML=comms.length?comms.map(c=>`<div class="cmt"><div class="cmt-data">${c.data}</div><div class="cmt-txt">${c.txt}</div></div>`).join('')
+  document.getElementById('m-lista').innerHTML=comms.length
+    ?comms.map(c=>`<div class="cmt"><div class="cmt-data">${c.data}</div><div class="cmt-txt">${c.txt}</div></div>`).join('')
     :'<div style="font-size:11px;color:var(--txt2)">Nenhum comentário ainda.</div>';
   document.getElementById('overlay').classList.add('on');
 }
@@ -611,7 +616,7 @@ function salvarComentario(){
   if(!comentarios[modalRemessa])comentarios[modalRemessa]=[];
   comentarios[modalRemessa].push({txt,data:new Date().toLocaleString('pt-BR')});
   localStorage.setItem('cg_com',JSON.stringify(comentarios));
-  fecharModal();filtrar();
+  fecharModal();
 }
 
 document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))fecharModal();});
