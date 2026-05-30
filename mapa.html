@@ -405,7 +405,7 @@ async function carregar(){
     todos=(json.table.rows||[]).filter(r=>r&&r.c).map(r=>{
       const v=r.c.map(c=>c?c.v:null);
       return{
-        modelo:v[9]||'',grupo:(v[10]||'').trim(),forma:v[11]||'',
+        modelo:v[9]||'',grupo:String(v[10]||'').trim(),forma:v[11]||'',
         construcao:v[12]||'',data_entrega:v[13]||'',cor:v[14]||'',
         remessa:v[15]||'',total:parseFloat(v[16])||0,
         '20_COR':parseFloat(v[17])||0,'30_COS':parseFloat(v[18])||0,
