@@ -407,17 +407,17 @@ async function carregar(){
     todos=(json.table.rows||[]).filter(r=>r&&r.c).map(r=>{
       const v=r.c.map(c=>c?c.v:null);
       return{
-        modelo:v[9]||'',grupo:String(v[10]||'').trim(),forma:v[11]||'',
-        construcao:v[12]||'',data_entrega:v[13]||'',cor:v[14]||'',
-        remessa:v[15]||'',total:parseFloat(v[16])||0,
-        '20_COR':parseFloat(v[17])||0,'30_COS':parseFloat(v[18])||0,
-        '40_COS':parseFloat(v[19])||0,'45_PAL':parseFloat(v[20])||0,
-        '60_PRE':parseFloat(v[21])||0,'70_AGR':parseFloat(v[22])||0,
-        '80_MON':parseFloat(v[23])||0,'nao_exp':parseFloat(v[24])||0,
-        '10_ALM':parseFloat(v[25])||0,'12_SL':parseFloat(v[26])||0,
-        '41_TAL':parseFloat(v[27])||0,'42_ENF':parseFloat(v[28])||0,
-        '44_PAL':parseFloat(v[29])||0,'50_PRE':parseFloat(v[30])||0,
-        'trilho':String(v[22]||''),
+        modelo:String(v[0]||'').trim(),grupo:String(v[1]||'').trim(),forma:v[2]||'',
+        construcao:v[3]||'',data_entrega:v[4]||'',cor:String(v[5]||'').trim(),
+        remessa:v[6]||'',total:parseFloat(v[7])||0,
+        '20_COR':parseFloat(v[8])||0,'30_COS':parseFloat(v[9])||0,
+        '40_COS':parseFloat(v[10])||0,'45_PAL':parseFloat(v[11])||0,
+        '60_PRE':parseFloat(v[12])||0,'70_AGR':parseFloat(v[13])||0,
+        '80_MON':parseFloat(v[14])||0,'nao_exp':parseFloat(v[15])||0,
+        '10_ALM':parseFloat(v[16])||0,'12_SL':parseFloat(v[17])||0,
+        '41_TAL':parseFloat(v[18])||0,'42_ENF':parseFloat(v[19])||0,
+        '44_PAL':parseFloat(v[20])||0,'50_PRE':parseFloat(v[21])||0,
+        'trilho':String(v[22]||'').trim(),
       };
     }).filter(r=>r.remessa&&r.modelo&&!r.modelo.toString().toUpperCase().includes('TOTAL'));
 
