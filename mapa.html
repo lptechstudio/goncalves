@@ -264,6 +264,7 @@ header{background:var(--c1);border-bottom:2px solid var(--vm);padding:0 20px;hei
     <input type="text" id="busca-mapa" placeholder="🔍 Buscar modelo, cor, grupo, remessa..." oninput="filtrarMapa()">
     <select id="fg-mapa" onchange="filtrarMapa()"><option value="">Todos os grupos</option></select>
     <select id="fd-mapa" onchange="filtrarMapa()"><option value="">Todas as entregas</option></select>
+    <select id="ft-mapa" onchange="filtrarMapa()"><option value="">Todos os trilhos</option><option value="LINHA 1">Trilho 01</option><option value="LINHA 2">Trilho 02</option></select>
     <div class="stats-label" id="stats-mapa"></div>
   </div>
   <div class="table-wrap">
@@ -304,6 +305,7 @@ header{background:var(--c1);border-bottom:2px solid var(--vm);padding:0 20px;hei
     <input type="text" id="busca-almox" placeholder="🔍 Buscar modelo, cor, grupo, remessa..." oninput="filtrarAlmox()">
     <select id="fg-almox" onchange="filtrarAlmox()"><option value="">Todos os grupos</option></select>
     <select id="fd-almox" onchange="filtrarAlmox()"><option value="">Todas as entregas</option></select>
+    <select id="ft-almox" onchange="filtrarAlmox()"><option value="">Todos os trilhos</option><option value="LINHA 1">Trilho 01</option><option value="LINHA 2">Trilho 02</option></select>
     <div class="stats-label" id="stats-almox"></div>
   </div>
   <div class="table-wrap">
@@ -415,6 +417,7 @@ async function carregar(){
         '10_ALM':parseFloat(v[25])||0,'12_SL':parseFloat(v[26])||0,
         '41_TAL':parseFloat(v[27])||0,'42_ENF':parseFloat(v[28])||0,
         '44_PAL':parseFloat(v[29])||0,'50_PRE':parseFloat(v[30])||0,
+        'trilho':String(v[31]||''),
       };
     }).filter(r=>r.remessa&&r.modelo&&!r.modelo.toString().toUpperCase().includes('TOTAL'));
 
@@ -499,9 +502,10 @@ function getFiltrados(prefixo){
   const busca=document.getElementById(`busca-${prefixo}`).value.toLowerCase();
   const grupo=document.getElementById(`fg-${prefixo}`).value;
   const data=document.getElementById(`fd-${prefixo}`).value;
+  const trilho=document.getElementById(`ft-${prefixo}`)?.value||'';
   return todos.filter(r=>{
     const mb=!busca||r.modelo.toLowerCase().includes(busca)||r.cor.toLowerCase().includes(busca)||String(r.remessa).includes(busca)||r.grupo.toLowerCase().includes(busca);
-    return mb&&(!grupo||r.grupo===grupo)&&(!data||r.data_entrega===data);
+    return mb&&(!grupo||r.grupo===grupo)&&(!data||r.data_entrega===data)&&(!trilho||r.trilho===trilho);
   });
 }
 
