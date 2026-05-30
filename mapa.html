@@ -417,7 +417,7 @@ async function carregar(){
         '10_ALM':parseFloat(v[25])||0,'12_SL':parseFloat(v[26])||0,
         '41_TAL':parseFloat(v[27])||0,'42_ENF':parseFloat(v[28])||0,
         '44_PAL':parseFloat(v[29])||0,'50_PRE':parseFloat(v[30])||0,
-        'trilho':String(v[31]||''),
+        'trilho':String(v[22]||''),
       };
     }).filter(r=>r.remessa&&r.modelo&&!r.modelo.toString().toUpperCase().includes('TOTAL'));
 
