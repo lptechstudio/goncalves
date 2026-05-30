@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa de Produção - Calçados Gonçalves</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --vermelho: #B8001F;
+  --vermelho-escuro: #8B0016;
+  --vermelho-claro: #FF1A3C;
+  --preto: #0A0A0A;
+  --cinza-escuro: #141414;
+  --cinza-medio: #1E1E1E;
+  --cinza-borda: #2A2A2A;
+  --cinza-texto: #888;
+  --branco: #F5F5F5;
+  --branco-suave: #BDBDBD;
+  --verde: #00C853;
+  --amarelo: #FFD600;
+  --laranja: #FF6D00;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--preto);
+  color: var(--branco);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+}
+
+/* HEADER */
+header {
+  background: var(--cinza-escuro);
+  border-bottom: 1px solid var(--cinza-borda);
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--vermelho);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 18px;
+  color: white;
+}
+
+.logo-text {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: var(--branco);
+}
+
+.logo-sub {
+  font-size: 10px;
+  color: var(--cinza-texto);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#ultima-atualizacao {
+  font-size: 11px;
+  color: var(--cinza-texto);
+}
+
+#btn-atualizar {
+  background: var(--vermelho);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+}
+
+#btn-atualizar:hover { background: var(--vermelho-claro); }
+#btn-atualizar:disabled { background: #444; cursor: wait; }
+
+/* FILTROS */
+.filtros {
+  background: var(--cinza-escuro);
+  border-bottom: 1px solid var(--cinza-borda);
+  padding: 12px 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filtros input, .filtros select {
+  background: var(--cinza-medio);
+  border: 1px solid var(--cinza-borda);
+  color: var(--branco);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.filtros input:focus, .filtros select:focus {
+  border-color: var(--vermelho);
+}
+
+.filtros input { min-width: 200px; }
+.filtros select { min-width: 160px; }
+
+#stats {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--cinza-texto);
+}
+
+#stats span { color: var(--branco); font-weight: 600; }
+
+/* LOADING */
+#loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  gap: 20px;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--cinza-borda);
+  border-top-color: var(--vermelho);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#loading p {
+  color: var(--cinza-texto);
+  font-size: 14px;
+}
+
+/* ERRO */
+#erro {
+  display: none;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--cinza-texto);
+}
+
+#erro h2 { color: var(--vermelho); margin-bottom: 8px; }
+
+/* CONTEÚDO PRINCIPAL */
+#conteudo { padding: 20px; display: none; }
+
+/* GRUPOS */
+.grupo-bloco {
+  margin-bottom: 32px;
+}
+
+.grupo-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--vermelho);
+}
+
+.grupo-nome {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: var(--branco);
+}
+
+.grupo-badge {
+  background: var(--vermelho);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* TABELA */
+.tabela-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid var(--cinza-borda);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+thead tr {
+  background: var(--cinza-medio);
+}
+
+thead th {
+  padding: 10px 12px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--cinza-texto);
+  white-space: nowrap;
+  border-bottom: 1px solid var(--cinza-borda);
+}
+
+thead th.col-info { text-align: left; }
+
+tbody tr {
+  border-bottom: 1px solid var(--cinza-borda);
+  transition: background 0.15s;
+}
+
+tbody tr:hover { background: rgba(184,0,31,0.05); }
+tbody tr:last-child { border-bottom: none; }
+
+tbody td {
+  padding: 10px 12px;
+  text-align: center;
+  color: var(--branco-suave);
+  white-space: nowrap;
+}
+
+tbody td.col-info { text-align: left; }
+
+.modelo-tag {
+  font-weight: 700;
+  color: var(--branco);
+  font-size: 13px;
+}
+
+.cor-tag {
+  color: var(--branco-suave);
+  font-size: 11px;
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.remessa-tag {
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--cinza-texto);
+}
+
+.data-tag {
+  font-size: 11px;
+  color: var(--amarelo);
+  font-weight: 600;
+}
+
+.total-tag {
+  font-weight: 700;
+  color: var(--branco);
+}
+
+/* CÉLULAS DE SETOR */
+.setor-cell {
+  position: relative;
+}
+
+.setor-val {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.setor-ok {
+  color: var(--verde);
+}
+
+.setor-pendente {
+  color: var(--vermelho-claro);
+}
+
+.setor-zero {
+  color: var(--cinza-borda);
+}
+
+/* BARRA DE PROGRESSO GERAL */
+.progresso-bar {
+  width: 80px;
+  height: 6px;
+  background: var(--cinza-borda);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.progresso-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--verde);
+  transition: width 0.5s ease;
+}
+
+.progresso-fill.medio { background: var(--amarelo); }
+.progresso-fill.baixo { background: var(--vermelho-claro); }
+
+/* COMENTÁRIOS */
+.btn-comentario {
+  background: none;
+  border: 1px solid var(--cinza-borda);
+  color: var(--cinza-texto);
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+  transition: all 0.2s;
+}
+
+.btn-comentario:hover {
+  border-color: var(--vermelho);
+  color: var(--branco);
+}
+
+.btn-comentario.tem-comentario {
+  border-color: var(--amarelo);
+  color: var(--amarelo);
+}
+
+/* MODAL COMENTÁRIO */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.ativo { display: flex; }
+
+.modal {
+  background: var(--cinza-escuro);
+  border: 1px solid var(--cinza-borda);
+  border-radius: 12px;
+  padding: 24px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.modal h3 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 20px;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.modal p.modal-sub {
+  font-size: 12px;
+  color: var(--cinza-texto);
+  margin-bottom: 16px;
+}
+
+.modal textarea {
+  width: 100%;
+  background: var(--cinza-medio);
+  border: 1px solid var(--cinza-borda);
+  border-radius: 6px;
+  color: var(--branco);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  padding: 10px;
+  resize: vertical;
+  min-height: 100px;
+  outline: none;
+}
+
+.modal textarea:focus { border-color: var(--vermelho); }
+
+.modal-acoes {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  justify-content: flex-end;
+}
+
+.btn-cancelar {
+  background: none;
+  border: 1px solid var(--cinza-borda);
+  color: var(--branco-suave);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.btn-salvar {
+  background: var(--vermelho);
+  border: none;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+}
+
+/* COMENTARIOS LISTA */
+.comentarios-lista {
+  margin-top: 12px;
+  max-height: 150px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.comentario-item {
+  background: var(--cinza-medio);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 12px;
+}
+
+.comentario-data {
+  font-size: 10px;
+  color: var(--cinza-texto);
+  margin-bottom: 2px;
+}
+
+/* VAZIO */
+.vazio {
+  text-align: center;
+  padding: 40px;
+  color: var(--cinza-texto);
+  font-size: 14px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  header { padding: 0 12px; }
+  .logo-text { font-size: 16px; }
+  #ultima-atualizacao { display: none; }
+  .filtros { padding: 10px 12px; }
+  .filtros input { min-width: 150px; }
+  #conteudo { padding: 12px; }
+  .grupo-nome { font-size: 18px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">CG</div>
+    <div>
+      <div class="logo-text">Calçados Gonçalves</div>
+      <div class="logo-sub">Mapa de Produção</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span id="ultima-atualizacao"></span>
+    <button id="btn-atualizar" onclick="carregarDados()">
+      ↻ Atualizar
+    </button>
+  </div>
+</header>
+
+<div class="filtros">
+  <input type="text" id="busca" placeholder="🔍 Buscar modelo, cor, remessa..." oninput="filtrar()">
+  <select id="filtro-grupo" onchange="filtrar()">
+    <option value="">Todos os grupos</option>
+  </select>
+  <select id="filtro-data" onchange="filtrar()">
+    <option value="">Todas as datas</option>
+  </select>
+  <div id="stats"></div>
+</div>
+
+<div id="loading">
+  <div class="spinner"></div>
+  <p>Carregando dados de produção...</p>
+</div>
+
+<div id="erro">
+  <h2>Erro ao carregar dados</h2>
+  <p id="erro-msg"></p>
+</div>
+
+<div id="conteudo"></div>
+
+<!-- MODAL COMENTÁRIO -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3 id="modal-titulo">Comentários</h3>
+    <p class="modal-sub" id="modal-sub"></p>
+    <div class="comentarios-lista" id="comentarios-lista"></div>
+    <textarea id="comentario-texto" placeholder="Digite seu comentário..."></textarea>
+    <div class="modal-acoes">
+      <button class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-salvar" onclick="salvarComentario()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// CONFIGURAÇÃO — ID do Google Sheets
+// ============================================================
+const SHEET_ID = '1lWix0sry-XtQHN5h5RhXsjboGge9YtUq-uSxcplGUgY';
+const SHEET_NAME = 'Mapa de Produção';
+// ============================================================
+
+const SETORES = [
+  { col: 'I', label: '10\nALM', key: '10_ALM' },
+  { col: 'J', label: '20\nCOR', key: '20_COR' },
+  { col: 'K', label: '30\nCOS', key: '30_COS' },
+  { col: 'L', label: '40\nCOS', key: '40_COS' },
+  { col: 'M', label: '45\nPAL', key: '45_PAL' },
+  { col: 'N', label: '60\nPRE', key: '60_PRE' },
+  { col: 'O', label: '70\nAGR', key: '70_AGR' },
+  { col: 'P', label: '80\nMON', key: '80_MON' },
+];
+
+let todosRegistros = [];
+let registrosFiltrados = [];
+let comentarios = JSON.parse(localStorage.getItem('cg_comentarios') || '{}');
+let modalRemessa = null;
+
+async function carregarDados() {
+  const btn = document.getElementById('btn-atualizar');
+  btn.disabled = true;
+  btn.textContent = '⏳ Carregando...';
+  document.getElementById('loading').style.display = 'flex';
+  document.getElementById('conteudo').style.display = 'none';
+  document.getElementById('erro').style.display = 'none';
+
+  try {
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+    const res = await fetch(url);
+    const text = await res.text();
+    const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+    
+    const cols = json.table.cols.map(c => c.label);
+    const rows = json.table.rows;
+
+    todosRegistros = rows
+      .filter(r => r && r.c)
+      .map(r => {
+        const vals = r.c.map(c => c ? c.v : null);
+        return {
+          modelo:    vals[9]  || '',
+          grupo:     (vals[10] || '').trim(),
+          forma:     vals[11] || '',
+          construcao: vals[12] || '',
+          data_entrega: vals[13] || '',
+          cor:       vals[14] || '',
+          remessa:   vals[15] || '',
+          total:     parseFloat(vals[16]) || 0,
+          '20_COR':  parseFloat(vals[17]) || 0,
+          '30_COS':  parseFloat(vals[18]) || 0,
+          '40_COS':  parseFloat(vals[19]) || 0,
+          '45_PAL':  parseFloat(vals[20]) || 0,
+          '60_PRE':  parseFloat(vals[21]) || 0,
+          '70_AGR':  parseFloat(vals[22]) || 0,
+          '80_MON':  parseFloat(vals[23]) || 0,
+          'nao_exp': parseFloat(vals[24]) || 0,
+          '10_ALM':  parseFloat(vals[25]) || 0,
+        };
+      })
+      .filter(r => r.remessa && r.modelo && !r.modelo.includes('TOTAL') && !r.modelo.includes('Total'));
+
+    popularFiltros();
+    filtrar();
+
+    const agora = new Date();
+    document.getElementById('ultima-atualizacao').textContent = 
+      `Atualizado: ${agora.toLocaleTimeString('pt-BR')}`;
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('conteudo').style.display = 'block';
+
+  } catch(e) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('erro').style.display = 'block';
+    document.getElementById('erro-msg').textContent = 
+      'Verifique se a planilha está compartilhada publicamente ou tente atualizar. Erro: ' + e.message;
+    console.error(e);
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '↻ Atualizar';
+}
+
+function popularFiltros() {
+  const grupos = [...new Set(todosRegistros.map(r => r.grupo))].sort();
+  const datas = [...new Set(todosRegistros.map(r => r.data_entrega).filter(Boolean))].sort();
+
+  const selGrupo = document.getElementById('filtro-grupo');
+  selGrupo.innerHTML = '<option value="">Todos os grupos</option>';
+  grupos.forEach(g => {
+    const opt = document.createElement('option');
+    opt.value = g;
+    opt.textContent = g;
+    selGrupo.appendChild(opt);
+  });
+
+  const selData = document.getElementById('filtro-data');
+  selData.innerHTML = '<option value="">Todas as datas</option>';
+  datas.forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d;
+    opt.textContent = formatarData(d);
+    selData.appendChild(opt);
+  });
+}
+
+function filtrar() {
+  const busca = document.getElementById('busca').value.toLowerCase();
+  const grupo = document.getElementById('filtro-grupo').value;
+  const data = document.getElementById('filtro-data').value;
+
+  registrosFiltrados = todosRegistros.filter(r => {
+    const matchBusca = !busca || 
+      r.modelo.toLowerCase().includes(busca) ||
+      r.cor.toLowerCase().includes(busca) ||
+      String(r.remessa).includes(busca) ||
+      r.grupo.toLowerCase().includes(busca);
+    const matchGrupo = !grupo || r.grupo === grupo;
+    const matchData = !data || r.data_entrega === data;
+    return matchBusca && matchGrupo && matchData;
+  });
+
+  renderizar();
+}
+
+function formatarData(val) {
+  if (!val) return '';
+  try {
+    // Google Sheets envia como "Date(2026,5,1)" 
+    if (typeof val === 'string' && val.startsWith('Date')) {
+      const parts = val.match(/Date\((\d+),(\d+),(\d+)\)/);
+      if (parts) {
+        const d = new Date(parseInt(parts[1]), parseInt(parts[2]), parseInt(parts[3]));
+        return d.toLocaleDateString('pt-BR');
+      }
+    }
+    if (typeof val === 'number') {
+      const d = new Date(1899, 11, 30);
+      d.setDate(d.getDate() + val);
+      return d.toLocaleDateString('pt-BR');
+    }
+    return val;
+  } catch(e) { return val; }
+}
+
+function calcularProgresso(r) {
+  const setores = ['10_ALM','20_COR','30_COS','40_COS','45_PAL','60_PRE','70_AGR','80_MON'];
+  const concluidos = setores.filter(s => r[s] === 0).length;
+  return Math.round((concluidos / setores.length) * 100);
+}
+
+function renderSetor(val, total) {
+  if (val === 0 || val === null) {
+    return `<span class="setor-val setor-ok">✓</span>`;
+  }
+  if (val > 0) {
+    return `<span class="setor-val setor-pendente">${val}</span>`;
+  }
+  return `<span class="setor-val setor-zero">—</span>`;
+}
+
+function renderizar() {
+  const conteudo = document.getElementById('conteudo');
+  
+  if (registrosFiltrados.length === 0) {
+    conteudo.innerHTML = '<div class="vazio">Nenhuma remessa encontrada com os filtros aplicados.</div>';
+    document.getElementById('stats').innerHTML = '';
+    return;
+  }
+
+  // Agrupar por grupo
+  const grupos = {};
+  registrosFiltrados.forEach(r => {
+    if (!grupos[r.grupo]) grupos[r.grupo] = [];
+    grupos[r.grupo].push(r);
+  });
+
+  document.getElementById('stats').innerHTML = 
+    `<span>${registrosFiltrados.length}</span> remessas em <span>${Object.keys(grupos).length}</span> grupos`;
+
+  let html = '';
+  
+  Object.entries(grupos).sort(([a],[b]) => a.localeCompare(b)).forEach(([grupo, registros]) => {
+    html += `
+    <div class="grupo-bloco">
+      <div class="grupo-header">
+        <div class="grupo-nome">${grupo}</div>
+        <div class="grupo-badge">${registros.length} remessas</div>
+      </div>
+      <div class="tabela-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-info">Modelo</th>
+              <th class="col-info">Cor</th>
+              <th>Remessa</th>
+              <th>Forma</th>
+              <th>Const.</th>
+              <th>Entrega</th>
+              <th>Total</th>
+              <th>10 ALM</th>
+              <th>20 COR</th>
+              <th>30 COS</th>
+              <th>40 COS</th>
+              <th>45 PAL</th>
+              <th>60 PRE</th>
+              <th>70 AGR</th>
+              <th>80 MON</th>
+              <th>Progresso</th>
+              <th>💬</th>
+            </tr>
+          </thead>
+          <tbody>
+    `;
+
+    registros.forEach(r => {
+      const prog = calcularProgresso(r);
+      const progClass = prog >= 75 ? '' : prog >= 40 ? 'medio' : 'baixo';
+      const temComentario = comentarios[r.remessa] && comentarios[r.remessa].length > 0;
+
+      html += `
+        <tr>
+          <td class="col-info"><div class="modelo-tag">${r.modelo}</div></td>
+          <td class="col-info"><div class="cor-tag" title="${r.cor}">${r.cor}</div></td>
+          <td><div class="remessa-tag">${r.remessa}</div></td>
+          <td>${r.forma || '—'}</td>
+          <td>${r.construcao || '—'}</td>
+          <td><div class="data-tag">${formatarData(r.data_entrega)}</div></td>
+          <td><div class="total-tag">${r.total}</div></td>
+          <td class="setor-cell">${renderSetor(r['10_ALM'], r.total)}</td>
+          <td class="setor-cell">${renderSetor(r['20_COR'], r.total)}</td>
+          <td class="setor-cell">${renderSetor(r['30_COS'], r.total)}</td>
+          <td class="setor-cell">${renderSetor(r['40_COS'], r.total)}</td>
+          <td class="setor-cell">${renderSetor(r['45_PAL'], r.total)}</td>
+          <td class="setor-cell">${renderSetor(r['60_PRE'], r.total)}</td>
+          <td class="setor-cell">${renderSetor(r['70_AGR'], r.total)}</td>
+          <td class="setor-cell">${renderSetor(r['80_MON'], r.total)}</td>
+          <td>
+            <div class="progresso-bar">
+              <div class="progresso-fill ${progClass}" style="width:${prog}%"></div>
+            </div>
+            <div style="font-size:10px;color:var(--cinza-texto);margin-top:2px">${prog}%</div>
+          </td>
+          <td>
+            <button class="btn-comentario ${temComentario ? 'tem-comentario' : ''}" 
+              onclick="abrirModal('${r.remessa}','${r.modelo}','${r.cor.replace(/'/g,"\\'")}')">
+              ${temComentario ? '💬 ' + comentarios[r.remessa].length : '+ Add'}
+            </button>
+          </td>
+        </tr>
+      `;
+    });
+
+    html += `</tbody></table></div></div>`;
+  });
+
+  conteudo.innerHTML = html;
+}
+
+function abrirModal(remessa, modelo, cor) {
+  modalRemessa = remessa;
+  document.getElementById('modal-titulo').textContent = modelo;
+  document.getElementById('modal-sub').textContent = `Remessa ${remessa} · ${cor}`;
+  document.getElementById('comentario-texto').value = '';
+  
+  const lista = document.getElementById('comentarios-lista');
+  const comms = comentarios[remessa] || [];
+  
+  if (comms.length === 0) {
+    lista.innerHTML = '<div style="font-size:12px;color:var(--cinza-texto);padding:4px">Nenhum comentário ainda.</div>';
+  } else {
+    lista.innerHTML = comms.map(c => `
+      <div class="comentario-item">
+        <div class="comentario-data">${c.data} · ${c.autor || 'Supervisor'}</div>
+        <div>${c.texto}</div>
+      </div>
+    `).join('');
+  }
+  
+  document.getElementById('modal').classList.add('ativo');
+}
+
+function fecharModal() {
+  document.getElementById('modal').classList.remove('ativo');
+  modalRemessa = null;
+}
+
+function salvarComentario() {
+  const texto = document.getElementById('comentario-texto').value.trim();
+  if (!texto || !modalRemessa) return;
+  
+  if (!comentarios[modalRemessa]) comentarios[modalRemessa] = [];
+  comentarios[modalRemessa].push({
+    texto,
+    data: new Date().toLocaleString('pt-BR'),
+    autor: 'Supervisor'
+  });
+  
+  localStorage.setItem('cg_comentarios', JSON.stringify(comentarios));
+  fecharModal();
+  renderizar();
+}
+
+// Fechar modal clicando fora
+document.getElementById('modal').addEventListener('click', function(e) {
+  if (e.target === this) fecharModal();
+});
+
+// Iniciar
+carregarDados();
+</script>
+</body>
+</html>
