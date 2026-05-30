@@ -4,481 +4,286 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mapa de Produção - Calçados Gonçalves</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --vermelho: #B8001F;
-  --vermelho-escuro: #8B0016;
-  --vermelho-claro: #FF1A3C;
+  --vm: #B8001F;
+  --vm2: #FF1A3C;
   --preto: #0A0A0A;
-  --cinza-escuro: #141414;
-  --cinza-medio: #1E1E1E;
-  --cinza-borda: #2A2A2A;
-  --cinza-texto: #888;
-  --branco: #F5F5F5;
-  --branco-suave: #BDBDBD;
-  --verde: #00C853;
-  --amarelo: #FFD600;
-  --laranja: #FF6D00;
+  --c1: #111111;
+  --c2: #1A1A1A;
+  --c3: #252525;
+  --borda: #2E2E2E;
+  --txt: #E8E8E8;
+  --txt2: #999;
+  --verde: #00D46A;
+  --amarelo: #FFB800;
+  --laranja: #FF6B2B;
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  background: var(--preto);
-  color: var(--branco);
-  font-family: 'DM Sans', sans-serif;
-  min-height: 100vh;
-}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--preto); color:var(--txt); font-family:'DM Sans',sans-serif; min-height:100vh; }
 
 /* HEADER */
 header {
-  background: var(--cinza-escuro);
-  border-bottom: 1px solid var(--cinza-borda);
-  padding: 0 20px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 60px;
+  background:var(--c1);
+  border-bottom:1px solid var(--borda);
+  padding:0 24px;
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:100;
 }
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.logo { display:flex; align-items:center; gap:10px; }
+.logo-box {
+  width:34px; height:34px;
+  background:var(--vm);
+  border-radius:7px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Bebas Neue',cursive;
+  font-size:16px; color:#fff;
 }
-
-.logo-icon {
-  width: 36px;
-  height: 36px;
-  background: var(--vermelho);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Bebas Neue', cursive;
-  font-size: 18px;
-  color: white;
+.logo-nome { font-family:'Bebas Neue',cursive; font-size:18px; letter-spacing:2px; }
+.logo-sub { font-size:10px; color:var(--txt2); letter-spacing:1px; text-transform:uppercase; margin-top:-2px; }
+.header-right { display:flex; align-items:center; gap:10px; }
+#sync-info { font-size:11px; color:var(--txt2); }
+#btn-sync {
+  background:var(--vm); border:none; color:#fff;
+  padding:7px 14px; border-radius:6px;
+  font-family:'DM Sans',sans-serif; font-size:12px; font-weight:600;
+  cursor:pointer; transition:background .2s;
+  display:flex; align-items:center; gap:5px;
 }
-
-.logo-text {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 20px;
-  letter-spacing: 2px;
-  color: var(--branco);
-}
-
-.logo-sub {
-  font-size: 10px;
-  color: var(--cinza-texto);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-#ultima-atualizacao {
-  font-size: 11px;
-  color: var(--cinza-texto);
-}
-
-#btn-atualizar {
-  background: var(--vermelho);
-  border: none;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: background 0.2s;
-}
-
-#btn-atualizar:hover { background: var(--vermelho-claro); }
-#btn-atualizar:disabled { background: #444; cursor: wait; }
+#btn-sync:hover { background:var(--vm2); }
+#btn-sync:disabled { background:#333; cursor:wait; }
 
 /* FILTROS */
 .filtros {
-  background: var(--cinza-escuro);
-  border-bottom: 1px solid var(--cinza-borda);
-  padding: 12px 20px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  align-items: center;
+  background:var(--c1);
+  border-bottom:1px solid var(--borda);
+  padding:10px 24px;
+  display:flex; gap:8px; flex-wrap:wrap; align-items:center;
 }
-
 .filtros input, .filtros select {
-  background: var(--cinza-medio);
-  border: 1px solid var(--cinza-borda);
-  color: var(--branco);
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  outline: none;
-  transition: border 0.2s;
+  background:var(--c2); border:1px solid var(--borda);
+  color:var(--txt); padding:7px 11px; border-radius:6px;
+  font-family:'DM Sans',sans-serif; font-size:12px; outline:none;
+  transition:border .2s;
 }
+.filtros input:focus, .filtros select:focus { border-color:var(--vm); }
+.filtros input { min-width:220px; }
+#stats { margin-left:auto; font-size:11px; color:var(--txt2); }
+#stats b { color:var(--txt); }
 
-.filtros input:focus, .filtros select:focus {
-  border-color: var(--vermelho);
-}
-
-.filtros input { min-width: 200px; }
-.filtros select { min-width: 160px; }
-
-#stats {
-  margin-left: auto;
-  font-size: 12px;
-  color: var(--cinza-texto);
-}
-
-#stats span { color: var(--branco); font-weight: 600; }
-
-/* LOADING */
+/* LOADING / ERRO */
 #loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 60vh;
-  gap: 20px;
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:center; height:60vh; gap:16px;
 }
-
 .spinner {
-  width: 48px;
-  height: 48px;
-  border: 3px solid var(--cinza-borda);
-  border-top-color: var(--vermelho);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  width:40px; height:40px;
+  border:3px solid var(--borda); border-top-color:var(--vm);
+  border-radius:50%; animation:spin .7s linear infinite;
+}
+@keyframes spin { to { transform:rotate(360deg); } }
+#loading p { font-size:13px; color:var(--txt2); }
+#erro { display:none; text-align:center; padding:60px 20px; }
+#erro h2 { color:var(--vm); margin-bottom:8px; }
+#erro p { color:var(--txt2); font-size:13px; }
+
+/* CONTEÚDO */
+#conteudo { padding:20px 24px; display:none; }
+
+/* CARD DE MODELO */
+.modelo-card {
+  background:var(--c1);
+  border:1px solid var(--borda);
+  border-radius:12px;
+  margin-bottom:16px;
+  overflow:hidden;
+  transition:border-color .2s;
+}
+.modelo-card:hover { border-color:#444; }
+
+.modelo-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 18px;
+  cursor:pointer;
+  user-select:none;
+  background:var(--c2);
+  gap:12px;
+}
+.modelo-header:hover { background:var(--c3); }
+
+.modelo-esq { display:flex; align-items:center; gap:14px; }
+
+.modelo-codigo {
+  font-family:'Bebas Neue',cursive;
+  font-size:26px; letter-spacing:2px;
+  color:var(--txt);
+  line-height:1;
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+.modelo-info { display:flex; flex-direction:column; gap:3px; }
 
-#loading p {
-  color: var(--cinza-texto);
-  font-size: 14px;
+.modelo-total-pill {
+  background:var(--vm);
+  color:#fff; font-size:11px; font-weight:700;
+  padding:3px 10px; border-radius:20px;
+  white-space:nowrap;
 }
 
-/* ERRO */
-#erro {
-  display: none;
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--cinza-texto);
+.modelo-grupos-count {
+  font-size:11px; color:var(--txt2);
 }
 
-#erro h2 { color: var(--vermelho); margin-bottom: 8px; }
+.modelo-dir { display:flex; align-items:center; gap:12px; }
 
-/* CONTEÚDO PRINCIPAL */
-#conteudo { padding: 20px; display: none; }
-
-/* GRUPOS */
-.grupo-bloco {
-  margin-bottom: 32px;
+/* BARRA MACRO */
+.macro-bar {
+  display:flex; align-items:center; gap:8px;
 }
-
-.grupo-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--vermelho);
+.macro-bar-track {
+  width:120px; height:8px;
+  background:var(--borda); border-radius:4px; overflow:hidden;
 }
-
-.grupo-nome {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 22px;
-  letter-spacing: 2px;
-  color: var(--branco);
+.macro-bar-fill {
+  height:100%; border-radius:4px;
+  background:var(--verde);
+  transition:width .5s ease;
 }
+.macro-bar-fill.med { background:var(--amarelo); }
+.macro-bar-fill.low { background:var(--vm2); }
+.macro-pct { font-size:12px; font-weight:700; color:var(--txt2); min-width:36px; text-align:right; }
 
-.grupo-badge {
-  background: var(--vermelho);
-  color: white;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 20px;
+.chevron {
+  font-size:14px; color:var(--txt2);
+  transition:transform .3s;
 }
+.modelo-card.aberto .chevron { transform:rotate(180deg); }
 
-/* TABELA */
-.tabela-wrapper {
-  overflow-x: auto;
-  border-radius: 8px;
-  border: 1px solid var(--cinza-borda);
-}
+/* TABELA DE REMESSAS */
+.remessas-wrapper { display:none; }
+.modelo-card.aberto .remessas-wrapper { display:block; }
+
+.remessas-table-wrap { overflow-x:auto; }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 12px;
+  width:100%; border-collapse:collapse; font-size:12px;
 }
-
-thead tr {
-  background: var(--cinza-medio);
-}
-
+thead tr { background:var(--c2); }
 thead th {
-  padding: 10px 12px;
-  text-align: center;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--cinza-texto);
-  white-space: nowrap;
-  border-bottom: 1px solid var(--cinza-borda);
+  padding:9px 10px; text-align:center;
+  font-size:10px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.8px;
+  color:var(--txt2); white-space:nowrap;
+  border-bottom:1px solid var(--borda);
 }
+thead th.al { text-align:left; }
+tbody tr { border-bottom:1px solid var(--borda); transition:background .15s; }
+tbody tr:last-child { border-bottom:none; }
+tbody tr:hover { background:rgba(255,255,255,.03); }
+tbody td { padding:10px 10px; text-align:center; color:var(--txt2); white-space:nowrap; }
+tbody td.al { text-align:left; }
 
-thead th.col-info { text-align: left; }
-
-tbody tr {
-  border-bottom: 1px solid var(--cinza-borda);
-  transition: background 0.15s;
+.grupo-pill {
+  display:inline-block;
+  background:var(--c3); border:1px solid var(--borda);
+  color:var(--txt); font-size:11px; font-weight:600;
+  padding:3px 8px; border-radius:5px;
+  max-width:160px; overflow:hidden; text-overflow:ellipsis;
 }
+.cor-txt { font-size:11px; color:var(--txt2); max-width:160px; overflow:hidden; text-overflow:ellipsis; display:block; }
+.rem-num { font-family:monospace; font-size:11px; color:#555; }
+.data-txt { font-size:11px; font-weight:700; color:var(--amarelo); }
+.total-txt { font-weight:700; font-size:13px; color:var(--txt); }
 
-tbody tr:hover { background: rgba(184,0,31,0.05); }
-tbody tr:last-child { border-bottom: none; }
-
-tbody td {
-  padding: 10px 12px;
-  text-align: center;
-  color: var(--branco-suave);
-  white-space: nowrap;
+/* CÉLULA SETOR */
+.sc {
+  display:flex; flex-direction:column; align-items:center; gap:2px;
+  min-width:42px;
 }
-
-tbody td.col-info { text-align: left; }
-
-.modelo-tag {
-  font-weight: 700;
-  color: var(--branco);
-  font-size: 13px;
+.sc-dot {
+  width:28px; height:28px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700;
 }
+.sc-ok { background:rgba(0,212,106,.15); color:var(--verde); }
+.sc-pend { background:rgba(255,26,60,.15); color:var(--vm2); }
+.sc-zero { background:var(--c3); color:#444; }
+.sc-num { font-size:9px; color:var(--txt2); }
 
-.cor-tag {
-  color: var(--branco-suave);
-  font-size: 11px;
-  max-width: 180px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+/* MINI PROGRESSO POR LINHA */
+.row-prog {
+  display:flex; gap:2px; align-items:center;
 }
-
-.remessa-tag {
-  font-family: monospace;
-  font-size: 11px;
-  color: var(--cinza-texto);
+.row-prog-dot {
+  width:8px; height:8px; border-radius:50%;
 }
+.rpd-ok { background:var(--verde); }
+.rpd-pend { background:var(--vm2); }
+.rpd-zero { background:var(--borda); }
 
-.data-tag {
-  font-size: 11px;
-  color: var(--amarelo);
-  font-weight: 600;
+/* COMENTÁRIO */
+.btn-com {
+  background:none; border:1px solid var(--borda);
+  color:var(--txt2); padding:4px 8px;
+  border-radius:4px; cursor:pointer; font-size:10px;
+  transition:all .2s; white-space:nowrap;
 }
+.btn-com:hover { border-color:var(--vm); color:var(--txt); }
+.btn-com.ativo { border-color:var(--amarelo); color:var(--amarelo); }
 
-.total-tag {
-  font-weight: 700;
-  color: var(--branco);
+/* MODAL */
+.overlay {
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,.85); z-index:200;
+  align-items:center; justify-content:center; padding:20px;
 }
-
-/* CÉLULAS DE SETOR */
-.setor-cell {
-  position: relative;
-}
-
-.setor-val {
-  font-weight: 700;
-  font-size: 13px;
-}
-
-.setor-ok {
-  color: var(--verde);
-}
-
-.setor-pendente {
-  color: var(--vermelho-claro);
-}
-
-.setor-zero {
-  color: var(--cinza-borda);
-}
-
-/* BARRA DE PROGRESSO GERAL */
-.progresso-bar {
-  width: 80px;
-  height: 6px;
-  background: var(--cinza-borda);
-  border-radius: 3px;
-  overflow: hidden;
-  margin: 0 auto;
-}
-
-.progresso-fill {
-  height: 100%;
-  border-radius: 3px;
-  background: var(--verde);
-  transition: width 0.5s ease;
-}
-
-.progresso-fill.medio { background: var(--amarelo); }
-.progresso-fill.baixo { background: var(--vermelho-claro); }
-
-/* COMENTÁRIOS */
-.btn-comentario {
-  background: none;
-  border: 1px solid var(--cinza-borda);
-  color: var(--cinza-texto);
-  padding: 4px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 11px;
-  transition: all 0.2s;
-}
-
-.btn-comentario:hover {
-  border-color: var(--vermelho);
-  color: var(--branco);
-}
-
-.btn-comentario.tem-comentario {
-  border-color: var(--amarelo);
-  color: var(--amarelo);
-}
-
-/* MODAL COMENTÁRIO */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
-  z-index: 200;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.modal-overlay.ativo { display: flex; }
-
+.overlay.on { display:flex; }
 .modal {
-  background: var(--cinza-escuro);
-  border: 1px solid var(--cinza-borda);
-  border-radius: 12px;
-  padding: 24px;
-  width: 100%;
-  max-width: 480px;
+  background:var(--c2); border:1px solid var(--borda);
+  border-radius:12px; padding:22px; width:100%; max-width:460px;
 }
-
-.modal h3 {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 20px;
-  letter-spacing: 1px;
-  margin-bottom: 4px;
+.modal h3 { font-family:'Bebas Neue',cursive; font-size:22px; letter-spacing:1px; margin-bottom:2px; }
+.modal-sub { font-size:11px; color:var(--txt2); margin-bottom:14px; }
+.comments-list {
+  max-height:140px; overflow-y:auto;
+  display:flex; flex-direction:column; gap:6px; margin-bottom:12px;
 }
-
-.modal p.modal-sub {
-  font-size: 12px;
-  color: var(--cinza-texto);
-  margin-bottom: 16px;
-}
-
+.cmt-item { background:var(--c3); border-radius:6px; padding:8px 10px; }
+.cmt-date { font-size:10px; color:var(--txt2); margin-bottom:2px; }
+.cmt-txt { font-size:12px; }
 .modal textarea {
-  width: 100%;
-  background: var(--cinza-medio);
-  border: 1px solid var(--cinza-borda);
-  border-radius: 6px;
-  color: var(--branco);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  padding: 10px;
-  resize: vertical;
-  min-height: 100px;
-  outline: none;
+  width:100%; background:var(--c3); border:1px solid var(--borda);
+  color:var(--txt); font-family:'DM Sans',sans-serif;
+  font-size:12px; padding:9px; border-radius:6px;
+  resize:vertical; min-height:80px; outline:none;
 }
-
-.modal textarea:focus { border-color: var(--vermelho); }
-
-.modal-acoes {
-  display: flex;
-  gap: 10px;
-  margin-top: 12px;
-  justify-content: flex-end;
+.modal textarea:focus { border-color:var(--vm); }
+.modal-btns { display:flex; gap:8px; margin-top:10px; justify-content:flex-end; }
+.btn-cancel {
+  background:none; border:1px solid var(--borda); color:var(--txt2);
+  padding:7px 14px; border-radius:6px; cursor:pointer;
+  font-family:'DM Sans',sans-serif; font-size:12px;
 }
-
-.btn-cancelar {
-  background: none;
-  border: 1px solid var(--cinza-borda);
-  color: var(--branco-suave);
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-}
-
-.btn-salvar {
-  background: var(--vermelho);
-  border: none;
-  color: white;
-  padding: 8px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 600;
-}
-
-/* COMENTARIOS LISTA */
-.comentarios-lista {
-  margin-top: 12px;
-  max-height: 150px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.comentario-item {
-  background: var(--cinza-medio);
-  border-radius: 6px;
-  padding: 8px 10px;
-  font-size: 12px;
-}
-
-.comentario-data {
-  font-size: 10px;
-  color: var(--cinza-texto);
-  margin-bottom: 2px;
-}
-
-/* VAZIO */
-.vazio {
-  text-align: center;
-  padding: 40px;
-  color: var(--cinza-texto);
-  font-size: 14px;
+.btn-save {
+  background:var(--vm); border:none; color:#fff;
+  padding:7px 18px; border-radius:6px; cursor:pointer;
+  font-family:'DM Sans',sans-serif; font-size:12px; font-weight:600;
 }
 
 /* MOBILE */
-@media (max-width: 768px) {
-  header { padding: 0 12px; }
-  .logo-text { font-size: 16px; }
-  #ultima-atualizacao { display: none; }
-  .filtros { padding: 10px 12px; }
-  .filtros input { min-width: 150px; }
-  #conteudo { padding: 12px; }
-  .grupo-nome { font-size: 18px; }
+@media(max-width:768px){
+  header { padding:0 14px; }
+  .filtros { padding:8px 14px; }
+  .filtros input { min-width:160px; }
+  #conteudo { padding:12px 14px; }
+  .modelo-codigo { font-size:20px; }
+  .macro-bar-track { width:80px; }
+  #sync-info { display:none; }
 }
 </style>
 </head>
@@ -486,85 +291,89 @@ tbody td.col-info { text-align: left; }
 
 <header>
   <div class="logo">
-    <div class="logo-icon">CG</div>
+    <div class="logo-box">CG</div>
     <div>
-      <div class="logo-text">Calçados Gonçalves</div>
+      <div class="logo-nome">Calçados Gonçalves</div>
       <div class="logo-sub">Mapa de Produção</div>
     </div>
   </div>
   <div class="header-right">
-    <span id="ultima-atualizacao"></span>
-    <button id="btn-atualizar" onclick="carregarDados()">
-      ↻ Atualizar
-    </button>
+    <span id="sync-info"></span>
+    <button id="btn-sync" onclick="carregar()">↻ Atualizar</button>
   </div>
 </header>
 
 <div class="filtros">
-  <input type="text" id="busca" placeholder="🔍 Buscar modelo, cor, remessa..." oninput="filtrar()">
-  <select id="filtro-grupo" onchange="filtrar()">
-    <option value="">Todos os grupos</option>
-  </select>
-  <select id="filtro-data" onchange="filtrar()">
-    <option value="">Todas as datas</option>
-  </select>
+  <input type="text" id="busca" placeholder="🔍 Buscar modelo, cor, remessa, grupo..." oninput="filtrar()">
+  <select id="f-grupo" onchange="filtrar()"><option value="">Todos os grupos</option></select>
+  <select id="f-data" onchange="filtrar()"><option value="">Todas as entregas</option></select>
   <div id="stats"></div>
 </div>
 
-<div id="loading">
-  <div class="spinner"></div>
-  <p>Carregando dados de produção...</p>
-</div>
-
-<div id="erro">
-  <h2>Erro ao carregar dados</h2>
-  <p id="erro-msg"></p>
-</div>
-
+<div id="loading"><div class="spinner"></div><p>Carregando produção...</p></div>
+<div id="erro"><h2>Erro ao carregar</h2><p id="erro-msg"></p></div>
 <div id="conteudo"></div>
 
-<!-- MODAL COMENTÁRIO -->
-<div class="modal-overlay" id="modal">
+<!-- MODAL -->
+<div class="overlay" id="overlay">
   <div class="modal">
-    <h3 id="modal-titulo">Comentários</h3>
-    <p class="modal-sub" id="modal-sub"></p>
-    <div class="comentarios-lista" id="comentarios-lista"></div>
-    <textarea id="comentario-texto" placeholder="Digite seu comentário..."></textarea>
-    <div class="modal-acoes">
-      <button class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
-      <button class="btn-salvar" onclick="salvarComentario()">Salvar</button>
+    <h3 id="m-titulo"></h3>
+    <div class="modal-sub" id="m-sub"></div>
+    <div class="comments-list" id="m-lista"></div>
+    <textarea id="m-txt" placeholder="Escreva um comentário..."></textarea>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-save" onclick="salvarComentario()">Salvar</button>
     </div>
   </div>
 </div>
 
 <script>
-// ============================================================
-// CONFIGURAÇÃO — ID do Google Sheets
-// ============================================================
 const SHEET_ID = '1lWix0sry-XtQHN5h5RhXsjboGge9YtUq-uSxcplGUgY';
 const SHEET_NAME = 'Mapa de Produção';
-// ============================================================
-
 const SETORES = [
-  { col: 'I', label: '10\nALM', key: '10_ALM' },
-  { col: 'J', label: '20\nCOR', key: '20_COR' },
-  { col: 'K', label: '30\nCOS', key: '30_COS' },
-  { col: 'L', label: '40\nCOS', key: '40_COS' },
-  { col: 'M', label: '45\nPAL', key: '45_PAL' },
-  { col: 'N', label: '60\nPRE', key: '60_PRE' },
-  { col: 'O', label: '70\nAGR', key: '70_AGR' },
-  { col: 'P', label: '80\nMON', key: '80_MON' },
+  {k:'10_ALM', l:'10\nALM'},
+  {k:'20_COR', l:'20\nCOR'},
+  {k:'30_COS', l:'30\nCOS'},
+  {k:'40_COS', l:'40\nCOS'},
+  {k:'45_PAL', l:'45\nPAL'},
+  {k:'60_PRE', l:'60\nPRE'},
+  {k:'70_AGR', l:'70\nAGR'},
+  {k:'80_MON', l:'80\nMON'},
 ];
 
-let todosRegistros = [];
-let registrosFiltrados = [];
-let comentarios = JSON.parse(localStorage.getItem('cg_comentarios') || '{}');
+let todos = [], filtrados = [], modelos = {};
+let comentarios = JSON.parse(localStorage.getItem('cg_com') || '{}');
 let modalRemessa = null;
+let abertos = new Set();
 
-async function carregarDados() {
-  const btn = document.getElementById('btn-atualizar');
-  btn.disabled = true;
-  btn.textContent = '⏳ Carregando...';
+function fmtData(v) {
+  if (!v) return '—';
+  try {
+    if (typeof v === 'string' && v.startsWith('Date')) {
+      const p = v.match(/Date\((\d+),(\d+),(\d+)\)/);
+      if (p) return new Date(+p[1], +p[2], +p[3]).toLocaleDateString('pt-BR');
+    }
+    if (typeof v === 'number') {
+      const d = new Date(1899,11,30); d.setDate(d.getDate()+v);
+      return d.toLocaleDateString('pt-BR');
+    }
+  } catch(e){}
+  return v;
+}
+
+function progresso(r) {
+  const ok = SETORES.filter(s => (r[s.k]||0) === 0).length;
+  return Math.round(ok / SETORES.length * 100);
+}
+
+function progClasse(p) {
+  return p >= 75 ? '' : p >= 40 ? 'med' : 'low';
+}
+
+async function carregar() {
+  const btn = document.getElementById('btn-sync');
+  btn.disabled = true; btn.textContent = '⏳ Carregando...';
   document.getElementById('loading').style.display = 'flex';
   document.getElementById('conteudo').style.display = 'none';
   document.getElementById('erro').style.display = 'none';
@@ -572,287 +381,230 @@ async function carregarDados() {
   try {
     const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
     const res = await fetch(url);
-    const text = await res.text();
-    const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
-    
-    const cols = json.table.cols.map(c => c.label);
-    const rows = json.table.rows;
+    const txt = await res.text();
+    const json = JSON.parse(txt.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
 
-    todosRegistros = rows
+    todos = (json.table.rows || [])
       .filter(r => r && r.c)
       .map(r => {
-        const vals = r.c.map(c => c ? c.v : null);
+        const v = r.c.map(c => c ? c.v : null);
         return {
-          modelo:    vals[9]  || '',
-          grupo:     (vals[10] || '').trim(),
-          forma:     vals[11] || '',
-          construcao: vals[12] || '',
-          data_entrega: vals[13] || '',
-          cor:       vals[14] || '',
-          remessa:   vals[15] || '',
-          total:     parseFloat(vals[16]) || 0,
-          '20_COR':  parseFloat(vals[17]) || 0,
-          '30_COS':  parseFloat(vals[18]) || 0,
-          '40_COS':  parseFloat(vals[19]) || 0,
-          '45_PAL':  parseFloat(vals[20]) || 0,
-          '60_PRE':  parseFloat(vals[21]) || 0,
-          '70_AGR':  parseFloat(vals[22]) || 0,
-          '80_MON':  parseFloat(vals[23]) || 0,
-          'nao_exp': parseFloat(vals[24]) || 0,
-          '10_ALM':  parseFloat(vals[25]) || 0,
+          modelo:    v[9]||'',
+          grupo:     (v[10]||'').trim(),
+          forma:     v[11]||'',
+          construcao: v[12]||'',
+          data_entrega: v[13]||'',
+          cor:       v[14]||'',
+          remessa:   v[15]||'',
+          total:     parseFloat(v[16])||0,
+          '20_COR':  parseFloat(v[17])||0,
+          '30_COS':  parseFloat(v[18])||0,
+          '40_COS':  parseFloat(v[19])||0,
+          '45_PAL':  parseFloat(v[20])||0,
+          '60_PRE':  parseFloat(v[21])||0,
+          '70_AGR':  parseFloat(v[22])||0,
+          '80_MON':  parseFloat(v[23])||0,
+          'nao_exp': parseFloat(v[24])||0,
+          '10_ALM':  parseFloat(v[25])||0,
         };
       })
-      .filter(r => r.remessa && r.modelo && !r.modelo.includes('TOTAL') && !r.modelo.includes('Total'));
+      .filter(r => r.remessa && r.modelo && !r.modelo.toString().toUpperCase().includes('TOTAL'));
 
     popularFiltros();
     filtrar();
-
-    const agora = new Date();
-    document.getElementById('ultima-atualizacao').textContent = 
-      `Atualizado: ${agora.toLocaleTimeString('pt-BR')}`;
-
+    document.getElementById('sync-info').textContent = 'Atualizado: ' + new Date().toLocaleTimeString('pt-BR');
     document.getElementById('loading').style.display = 'none';
     document.getElementById('conteudo').style.display = 'block';
-
   } catch(e) {
     document.getElementById('loading').style.display = 'none';
     document.getElementById('erro').style.display = 'block';
-    document.getElementById('erro-msg').textContent = 
-      'Verifique se a planilha está compartilhada publicamente ou tente atualizar. Erro: ' + e.message;
-    console.error(e);
+    document.getElementById('erro-msg').textContent = 'Erro: ' + e.message;
   }
 
-  btn.disabled = false;
-  btn.innerHTML = '↻ Atualizar';
+  btn.disabled = false; btn.innerHTML = '↻ Atualizar';
 }
 
 function popularFiltros() {
-  const grupos = [...new Set(todosRegistros.map(r => r.grupo))].sort();
-  const datas = [...new Set(todosRegistros.map(r => r.data_entrega).filter(Boolean))].sort();
-
-  const selGrupo = document.getElementById('filtro-grupo');
-  selGrupo.innerHTML = '<option value="">Todos os grupos</option>';
-  grupos.forEach(g => {
-    const opt = document.createElement('option');
-    opt.value = g;
-    opt.textContent = g;
-    selGrupo.appendChild(opt);
-  });
-
-  const selData = document.getElementById('filtro-data');
-  selData.innerHTML = '<option value="">Todas as datas</option>';
-  datas.forEach(d => {
-    const opt = document.createElement('option');
-    opt.value = d;
-    opt.textContent = formatarData(d);
-    selData.appendChild(opt);
-  });
+  const grupos = [...new Set(todos.map(r => r.grupo))].sort();
+  const datas  = [...new Set(todos.map(r => r.data_entrega).filter(Boolean))].sort();
+  const sg = document.getElementById('f-grupo');
+  sg.innerHTML = '<option value="">Todos os grupos</option>';
+  grupos.forEach(g => { const o = document.createElement('option'); o.value=g; o.textContent=g; sg.appendChild(o); });
+  const sd = document.getElementById('f-data');
+  sd.innerHTML = '<option value="">Todas as entregas</option>';
+  datas.forEach(d => { const o = document.createElement('option'); o.value=d; o.textContent=fmtData(d); sd.appendChild(o); });
 }
 
 function filtrar() {
   const busca = document.getElementById('busca').value.toLowerCase();
-  const grupo = document.getElementById('filtro-grupo').value;
-  const data = document.getElementById('filtro-data').value;
+  const grupo = document.getElementById('f-grupo').value;
+  const data  = document.getElementById('f-data').value;
 
-  registrosFiltrados = todosRegistros.filter(r => {
-    const matchBusca = !busca || 
-      r.modelo.toLowerCase().includes(busca) ||
-      r.cor.toLowerCase().includes(busca) ||
-      String(r.remessa).includes(busca) ||
-      r.grupo.toLowerCase().includes(busca);
-    const matchGrupo = !grupo || r.grupo === grupo;
-    const matchData = !data || r.data_entrega === data;
-    return matchBusca && matchGrupo && matchData;
+  filtrados = todos.filter(r => {
+    const mb = !busca || r.modelo.toLowerCase().includes(busca) || r.cor.toLowerCase().includes(busca) || String(r.remessa).includes(busca) || r.grupo.toLowerCase().includes(busca);
+    const mg = !grupo || r.grupo === grupo;
+    const md = !data  || r.data_entrega === data;
+    return mb && mg && md;
   });
 
   renderizar();
 }
 
-function formatarData(val) {
-  if (!val) return '';
-  try {
-    // Google Sheets envia como "Date(2026,5,1)" 
-    if (typeof val === 'string' && val.startsWith('Date')) {
-      const parts = val.match(/Date\((\d+),(\d+),(\d+)\)/);
-      if (parts) {
-        const d = new Date(parseInt(parts[1]), parseInt(parts[2]), parseInt(parts[3]));
-        return d.toLocaleDateString('pt-BR');
-      }
-    }
-    if (typeof val === 'number') {
-      const d = new Date(1899, 11, 30);
-      d.setDate(d.getDate() + val);
-      return d.toLocaleDateString('pt-BR');
-    }
-    return val;
-  } catch(e) { return val; }
+function agruparPorModelo(lista) {
+  const map = {};
+  lista.forEach(r => {
+    if (!map[r.modelo]) map[r.modelo] = [];
+    map[r.modelo].push(r);
+  });
+  return map;
 }
 
-function calcularProgresso(r) {
-  const setores = ['10_ALM','20_COR','30_COS','40_COS','45_PAL','60_PRE','70_AGR','80_MON'];
-  const concluidos = setores.filter(s => r[s] === 0).length;
-  return Math.round((concluidos / setores.length) * 100);
+function renderSetor(val) {
+  const n = parseFloat(val)||0;
+  if (n === 0) return `<div class="sc-dot sc-ok">✓</div>`;
+  return `<div class="sc-dot sc-pend">${n}</div>`;
 }
 
-function renderSetor(val, total) {
-  if (val === 0 || val === null) {
-    return `<span class="setor-val setor-ok">✓</span>`;
-  }
-  if (val > 0) {
-    return `<span class="setor-val setor-pendente">${val}</span>`;
-  }
-  return `<span class="setor-val setor-zero">—</span>`;
+function renderMiniProg(r) {
+  return SETORES.map(s => {
+    const n = parseFloat(r[s.k])||0;
+    const cls = n === 0 ? 'rpd-ok' : 'rpd-pend';
+    return `<div class="row-prog-dot ${cls}" title="${s.l.replace('\n','-')}: ${n===0?'✓':n}"></div>`;
+  }).join('');
 }
 
 function renderizar() {
-  const conteudo = document.getElementById('conteudo');
-  
-  if (registrosFiltrados.length === 0) {
-    conteudo.innerHTML = '<div class="vazio">Nenhuma remessa encontrada com os filtros aplicados.</div>';
+  const cont = document.getElementById('conteudo');
+  if (!filtrados.length) {
+    cont.innerHTML = '<div style="text-align:center;padding:60px;color:var(--txt2)">Nenhuma remessa encontrada.</div>';
     document.getElementById('stats').innerHTML = '';
     return;
   }
 
-  // Agrupar por grupo
-  const grupos = {};
-  registrosFiltrados.forEach(r => {
-    if (!grupos[r.grupo]) grupos[r.grupo] = [];
-    grupos[r.grupo].push(r);
-  });
-
-  document.getElementById('stats').innerHTML = 
-    `<span>${registrosFiltrados.length}</span> remessas em <span>${Object.keys(grupos).length}</span> grupos`;
+  const agrupado = agruparPorModelo(filtrados);
+  const totalModelos = Object.keys(agrupado).length;
+  document.getElementById('stats').innerHTML = `<b>${filtrados.length}</b> remessas em <b>${totalModelos}</b> modelos`;
 
   let html = '';
-  
-  Object.entries(grupos).sort(([a],[b]) => a.localeCompare(b)).forEach(([grupo, registros]) => {
+  Object.entries(agrupado).sort(([a],[b]) => a.localeCompare(b)).forEach(([modelo, remessas]) => {
+    const totalPares = remessas.reduce((s,r) => s + r.total, 0);
+    const grupos = [...new Set(remessas.map(r => r.grupo))];
+    const progGeral = Math.round(remessas.reduce((s,r) => s + progresso(r), 0) / remessas.length);
+    const pc = progClasse(progGeral);
+    const aberto = abertos.has(modelo) ? 'aberto' : '';
+
     html += `
-    <div class="grupo-bloco">
-      <div class="grupo-header">
-        <div class="grupo-nome">${grupo}</div>
-        <div class="grupo-badge">${registros.length} remessas</div>
-      </div>
-      <div class="tabela-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th class="col-info">Modelo</th>
-              <th class="col-info">Cor</th>
-              <th>Remessa</th>
-              <th>Forma</th>
-              <th>Const.</th>
-              <th>Entrega</th>
-              <th>Total</th>
-              <th>10 ALM</th>
-              <th>20 COR</th>
-              <th>30 COS</th>
-              <th>40 COS</th>
-              <th>45 PAL</th>
-              <th>60 PRE</th>
-              <th>70 AGR</th>
-              <th>80 MON</th>
-              <th>Progresso</th>
-              <th>💬</th>
-            </tr>
-          </thead>
-          <tbody>
-    `;
-
-    registros.forEach(r => {
-      const prog = calcularProgresso(r);
-      const progClass = prog >= 75 ? '' : prog >= 40 ? 'medio' : 'baixo';
-      const temComentario = comentarios[r.remessa] && comentarios[r.remessa].length > 0;
-
-      html += `
-        <tr>
-          <td class="col-info"><div class="modelo-tag">${r.modelo}</div></td>
-          <td class="col-info"><div class="cor-tag" title="${r.cor}">${r.cor}</div></td>
-          <td><div class="remessa-tag">${r.remessa}</div></td>
-          <td>${r.forma || '—'}</td>
-          <td>${r.construcao || '—'}</td>
-          <td><div class="data-tag">${formatarData(r.data_entrega)}</div></td>
-          <td><div class="total-tag">${r.total}</div></td>
-          <td class="setor-cell">${renderSetor(r['10_ALM'], r.total)}</td>
-          <td class="setor-cell">${renderSetor(r['20_COR'], r.total)}</td>
-          <td class="setor-cell">${renderSetor(r['30_COS'], r.total)}</td>
-          <td class="setor-cell">${renderSetor(r['40_COS'], r.total)}</td>
-          <td class="setor-cell">${renderSetor(r['45_PAL'], r.total)}</td>
-          <td class="setor-cell">${renderSetor(r['60_PRE'], r.total)}</td>
-          <td class="setor-cell">${renderSetor(r['70_AGR'], r.total)}</td>
-          <td class="setor-cell">${renderSetor(r['80_MON'], r.total)}</td>
-          <td>
-            <div class="progresso-bar">
-              <div class="progresso-fill ${progClass}" style="width:${prog}%"></div>
+    <div class="modelo-card ${aberto}" id="card-${modelo}">
+      <div class="modelo-header" onclick="toggleCard('${modelo}')">
+        <div class="modelo-esq">
+          <div class="modelo-codigo">${modelo}</div>
+          <div class="modelo-info">
+            <div class="modelo-total-pill">${totalPares} pares</div>
+            <div class="modelo-grupos-count">${grupos.length} grupo${grupos.length>1?'s':''} · ${remessas.length} remessa${remessas.length>1?'s':''}</div>
+          </div>
+        </div>
+        <div class="modelo-dir">
+          <div class="macro-bar">
+            <div class="macro-bar-track">
+              <div class="macro-bar-fill ${pc}" style="width:${progGeral}%"></div>
             </div>
-            <div style="font-size:10px;color:var(--cinza-texto);margin-top:2px">${prog}%</div>
-          </td>
-          <td>
-            <button class="btn-comentario ${temComentario ? 'tem-comentario' : ''}" 
-              onclick="abrirModal('${r.remessa}','${r.modelo}','${r.cor.replace(/'/g,"\\'")}')">
-              ${temComentario ? '💬 ' + comentarios[r.remessa].length : '+ Add'}
-            </button>
-          </td>
-        </tr>
-      `;
-    });
+            <div class="macro-pct">${progGeral}%</div>
+          </div>
+          <div class="chevron">▼</div>
+        </div>
+      </div>
 
-    html += `</tbody></table></div></div>`;
+      <div class="remessas-wrapper">
+        <div class="remessas-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th class="al">Grupo</th>
+                <th class="al">Cor</th>
+                <th>Remessa</th>
+                <th>Entrega</th>
+                <th>Total</th>
+                ${SETORES.map(s=>`<th>${s.l.replace('\n','<br>')}</th>`).join('')}
+                <th>Progresso</th>
+                <th>💬</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${remessas.map(r => {
+                const p = progresso(r);
+                const temCom = comentarios[r.remessa]?.length > 0;
+                return `
+                <tr>
+                  <td class="al"><span class="grupo-pill" title="${r.grupo}">${r.grupo}</span></td>
+                  <td class="al"><span class="cor-txt" title="${r.cor}">${r.cor}</span></td>
+                  <td><span class="rem-num">${r.remessa}</span></td>
+                  <td><span class="data-txt">${fmtData(r.data_entrega)}</span></td>
+                  <td><span class="total-txt">${r.total}</span></td>
+                  ${SETORES.map(s=>`<td><div class="sc">${renderSetor(r[s.k])}<span class="sc-num">${s.l.replace('\n','-')}</span></div></td>`).join('')}
+                  <td>
+                    <div class="row-prog">${renderMiniProg(r)}</div>
+                    <div style="font-size:10px;color:var(--txt2);margin-top:3px;text-align:center">${p}%</div>
+                  </td>
+                  <td>
+                    <button class="btn-com ${temCom?'ativo':''}"
+                      onclick="abrirModal('${r.remessa}','${modelo}','${r.cor.replace(/'/g,"\\'")}','${r.grupo.replace(/'/g,"\\'")}')">
+                      ${temCom ? '💬 '+comentarios[r.remessa].length : '+ Add'}
+                    </button>
+                  </td>
+                </tr>`;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>`;
   });
 
-  conteudo.innerHTML = html;
+  cont.innerHTML = html;
 }
 
-function abrirModal(remessa, modelo, cor) {
-  modalRemessa = remessa;
-  document.getElementById('modal-titulo').textContent = modelo;
-  document.getElementById('modal-sub').textContent = `Remessa ${remessa} · ${cor}`;
-  document.getElementById('comentario-texto').value = '';
-  
-  const lista = document.getElementById('comentarios-lista');
-  const comms = comentarios[remessa] || [];
-  
-  if (comms.length === 0) {
-    lista.innerHTML = '<div style="font-size:12px;color:var(--cinza-texto);padding:4px">Nenhum comentário ainda.</div>';
+function toggleCard(modelo) {
+  const card = document.getElementById('card-' + modelo);
+  if (abertos.has(modelo)) {
+    abertos.delete(modelo);
+    card.classList.remove('aberto');
   } else {
-    lista.innerHTML = comms.map(c => `
-      <div class="comentario-item">
-        <div class="comentario-data">${c.data} · ${c.autor || 'Supervisor'}</div>
-        <div>${c.texto}</div>
-      </div>
-    `).join('');
+    abertos.add(modelo);
+    card.classList.add('aberto');
   }
-  
-  document.getElementById('modal').classList.add('ativo');
+}
+
+function abrirModal(remessa, modelo, cor, grupo) {
+  modalRemessa = remessa;
+  document.getElementById('m-titulo').textContent = modelo + ' · ' + grupo;
+  document.getElementById('m-sub').textContent = 'Remessa ' + remessa + ' · ' + cor;
+  document.getElementById('m-txt').value = '';
+  const lista = document.getElementById('m-lista');
+  const comms = comentarios[remessa] || [];
+  lista.innerHTML = comms.length
+    ? comms.map(c => `<div class="cmt-item"><div class="cmt-date">${c.data}</div><div class="cmt-txt">${c.txt}</div></div>`).join('')
+    : '<div style="font-size:11px;color:var(--txt2)">Nenhum comentário ainda.</div>';
+  document.getElementById('overlay').classList.add('on');
 }
 
 function fecharModal() {
-  document.getElementById('modal').classList.remove('ativo');
+  document.getElementById('overlay').classList.remove('on');
   modalRemessa = null;
 }
 
 function salvarComentario() {
-  const texto = document.getElementById('comentario-texto').value.trim();
-  if (!texto || !modalRemessa) return;
-  
+  const txt = document.getElementById('m-txt').value.trim();
+  if (!txt || !modalRemessa) return;
   if (!comentarios[modalRemessa]) comentarios[modalRemessa] = [];
-  comentarios[modalRemessa].push({
-    texto,
-    data: new Date().toLocaleString('pt-BR'),
-    autor: 'Supervisor'
-  });
-  
-  localStorage.setItem('cg_comentarios', JSON.stringify(comentarios));
+  comentarios[modalRemessa].push({ txt, data: new Date().toLocaleString('pt-BR') });
+  localStorage.setItem('cg_com', JSON.stringify(comentarios));
   fecharModal();
-  renderizar();
+  filtrar();
 }
 
-// Fechar modal clicando fora
-document.getElementById('modal').addEventListener('click', function(e) {
-  if (e.target === this) fecharModal();
-});
+document.getElementById('overlay').addEventListener('click', e => { if (e.target === document.getElementById('overlay')) fecharModal(); });
 
-// Iniciar
-carregarDados();
+carregar();
 </script>
 </body>
 </html>
